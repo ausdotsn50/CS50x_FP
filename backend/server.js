@@ -5,58 +5,54 @@ import { sql } from "./config/db.js"
 
 dotenv.config();
 
-// initializing an express app
-// Middleware - function that runs in the middle between req and res
+const app = express(); // Initializing an ExpressJS app
+app.use(express.json()); // A built-in middleware
 
-// middleware can act as rate limiter as well
-const app = express();
+const PORT = process.env.PORT || 5001; // Default port: 5001
 
-// this is a built-in middleware
-app.use(express.json());
-
-// app.use prefix to creating custom middleware [?]
-
-const PORT = process.env.PORT || 5001;
-
-// PostgreSQL offers a powerful feature known as the SERIAL pseudo-type which simplifies generating auto-incrementing sequences for columns.
+// Initializing the database
+/* Key words: 
+        NOT EXIST
+        SERIAL pseudo-type simplifies generating auto-incrementing sequences for columns
+        DATE NOT NUL DEFAULT CURRENT_DATE
+*/
 async function initDB() {
     try {
-        await sql `CREATE TABLE IF NOT EXISTS sales(
+        await sql`CREATE TABLE IF NOT EXISTS products(
             id SERIAL PRIMARY KEY,
-            product_id VARCHAR(255) NOT NULL,
+            user_id VARCHAR(255) NOT NULL,
+            name VARCHAR(255) NOT NULL,
+            base_price DECIMAL(10,2) NOT NULL
+        )`;
+
+        await sql`CREATE TABLE IF NOT EXISTS customers(
+            id SERIAL PRIMARY KEY,
+            user_id VARCHAR(255) NOT NULL,
+            name VARCHAR(255) NOT NULL,
+            address TEXT NOT NULL
+        )`;
+
+        await sql `CREATE TABLE IF NOT EXISTS orders(
+            id SERIAL PRIMARY KEY,
+            product_id INT NOT NULL REFERENCES products(id),
+            customer_id INT NOT NULL REFERENCES customers(id),
             type VARCHAR(255) NOT NULL,
-            customer_id VARCHAR(255) NOT NULL,
             created_at DATE NOT NULL DEFAULT CURRENT_DATE
         )`;
-        // add another non-existing table here
         console.log("Database initialized succesfully");
     } catch(error) {
-        console.log(error)
+        console.log("Error initializing database", error);
         process.exit(1);
     }
 }
 
-// colon signifies dynamic
-/*
-    The req.params property is an object containing properties mapped to the named 
-    route “parameters”. For example, if you have the route /student/:id, then the “id” 
-    property is available as req.params.id. This object defaults to {}. 
-*/
-
 // add connection with the routes
 app.use("/api/sales", route);
-
-/*
-// defining route for root URL
-app.get("/", (req, res) => {
-   res.send("It's working"); 
-});
-*/
 
 // listening for incoming req on a specific port
 initDB().then(() => {
     // port listen only after initializing database
     app.listen(PORT, () =>  {
-        console.log("Server is up and running");
+        console.log("Server is up and running on PORT: ", PORT);
     });
 });

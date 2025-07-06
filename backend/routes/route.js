@@ -7,7 +7,7 @@ const router = express.Router();
 router.get("/", async(req,res) => {
     // To do
     try {
-        const overview = await sql`SELECT * FROM sales`;
+        const overview = await sql`SELECT * FROM orders`;
         console.log(overview);
     } catch(error) {
         console.log("Some error")
@@ -21,13 +21,13 @@ router.post("/", async(req,res) => {
         // id here is for sale.identification
         const { product_id, type, customer_id } = req.body;
 
-        if(!product_id || !type || !customer_id) {
+        if(!product_id || !customer_id || !type) {
             return res.status(400).json({ message: "All fields are required" });
         }
 
         const sale = await sql`
-            INSERT INTO sales(product_id, type, customer_id)
-            VALUES (${product_id}, ${type}, ${customer_id})
+            INSERT INTO orders(product_id, customer_id, type)
+            VALUES (${product_id}, ${customer_id}, ${type})
             RETURNING *
         `;
         console.log(sale);
