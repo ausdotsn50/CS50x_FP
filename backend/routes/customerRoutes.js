@@ -14,7 +14,7 @@ router.post("/", async(req,res) => {
             VALUES (${user_id}, ${name}, ${address})
             RETURNING *
         `;
-        console.log("Success");
+        console.log("Customer added successfully");
     } catch(error) {
         console.log("Post method for customers error");
     }

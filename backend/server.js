@@ -29,7 +29,7 @@ async function initDB() {
         await sql`CREATE TABLE IF NOT EXISTS products(
             id SERIAL PRIMARY KEY,
             user_id VARCHAR(255) NOT NULL,
-            name VARCHAR(255) NOT NULL,
+            item VARCHAR(255) NOT NULL,
             base_price DECIMAL(10,2) NOT NULL
         )`;
 
@@ -49,7 +49,7 @@ async function initDB() {
             created_at DATE NOT NULL DEFAULT CURRENT_DATE
         )`;
         
-        // await sql`ALTER SEQUENCE customers_id_seq RESTART WITH 1`;
+        // await sql`ALTER TABLE products RENAME COLUMN name TO item`;
         console.log("Database initialized succesfully");
     } catch(error) {
         console.log("Error initializing database", error);
