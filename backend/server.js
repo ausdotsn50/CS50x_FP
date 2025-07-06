@@ -1,7 +1,15 @@
+// Default imports
 import express from "express";
 import dotenv from "dotenv";
-import route from "./routes/route.js";
-import { sql } from "./config/db.js"
+
+// Specific imports from a module
+import { sql } from "./config/db.js";
+
+// Route imports
+import customerRoutes from "./routes/customerRoutes.js";
+import orderRoutes from "./routes/orderRoutes.js";
+import productRoutes from "./routes/productRoutes.js";
+
 
 dotenv.config();
 
@@ -36,9 +44,12 @@ async function initDB() {
             id SERIAL PRIMARY KEY,
             product_id INT NOT NULL REFERENCES products(id),
             customer_id INT NOT NULL REFERENCES customers(id),
+            quantity INT NOT NULL,
             type VARCHAR(255) NOT NULL,
             created_at DATE NOT NULL DEFAULT CURRENT_DATE
         )`;
+        
+        // await sql`ALTER SEQUENCE customers_id_seq RESTART WITH 1`;
         console.log("Database initialized succesfully");
     } catch(error) {
         console.log("Error initializing database", error);
@@ -46,10 +57,12 @@ async function initDB() {
     }
 }
 
-// add connection with the routes
-app.use("/api/sales", route);
+// Connection with created routes
+app.use("/api/orders", orderRoutes);
+app.use("/api/customers", customerRoutes);
+app.use("/api/products", productRoutes);
 
-// listening for incoming req on a specific port
+// Calling the initialize database function
 initDB().then(() => {
     // port listen only after initializing database
     app.listen(PORT, () =>  {
