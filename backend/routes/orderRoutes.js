@@ -3,10 +3,8 @@ import { sql } from "../config/db.js";
 
 const router = express.Router();
 
-// Noting the original loc: /api/orders
-// Check the orders
+// Route: /api/orders
 router.get("/", async(req,res) => {
-    // To do
     try {
         const overview = await sql`
             SELECT customers.name, address, products.item, base_price, quantity, type FROM orders
