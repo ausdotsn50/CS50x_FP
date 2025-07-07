@@ -1,24 +1,31 @@
-import { useClerk } from '@clerk/clerk-expo'
-import * as Linking from 'expo-linking'
-import { Text, TouchableOpacity } from 'react-native'
+import { ActivityIndicator, Text, TouchableOpacity } from 'react-native';
+import { useClerk } from '@clerk/clerk-expo';
+import { useRouter } from 'expo-router';
+import { useState } from 'react';
 
 export const SignOutButton = () => {
-  // Use `useClerk()` to access the `signOut()` function
-  const { signOut } = useClerk()
+  const { signOut } = useClerk();
+  const router = useRouter();
+  const [loading, setLoading] = useState(false);
+
   const handleSignOut = async () => {
     try {
-      await signOut()
-      // Redirect to your desired page
-      // Linking.openURL(Linking.createURL('/'))
+      setLoading(true); // on sign-out, setLoading 'state' to true
+      await signOut(); // from Clerk
+      router.replace('/sign-in');
     } catch (err) {
-      // See https://clerk.com/docs/custom-flows/error-handling
-      // for more info on error handling
-      console.error(JSON.stringify(err, null, 2))
+      console.error(JSON.stringify(err, null, 2));
+    } finally {
+      setLoading(false); // !imp
     }
-  }
+  };
+
   return (
-    <TouchableOpacity onPress={handleSignOut}>
-      <Text>Sign out</Text>
+    <TouchableOpacity onPress={handleSignOut} disabled={loading}>
+      {loading ? <ActivityIndicator /> : <Text>Sign out</Text>}
     </TouchableOpacity>
-  )
-}
+  );
+};
+
+// Loading: add acivity indicator
+// Else: button
