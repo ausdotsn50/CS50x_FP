@@ -61,7 +61,7 @@ export default function Page() {
 
         {error ? (
           <View style={styles.errorBox}>
-            <Ionicons name="alert-circle" size={20} color={COLORS.expense}/>
+            <Ionicons name="alert-circle" size={20} color={COLORS.redShd}/>
             <Text style={styles.errorText}>{error}</Text>
             <TouchableOpacity onPress={() => setError("")}>
               <Ionicons name="close" size={20} color={COLORS.textLight}/>

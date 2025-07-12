@@ -7,8 +7,8 @@ const oceanTheme = {
   border: "#B3E5FC",
   white: "#FFFFFF",
   textLight: "#4FC3F7",
-  expense: "#EF5350",
-  income: "#26A69A",
+  redShd: "#EF5350",
+  grnShd: "#26A69A",
   card: "#FFFFFF",
   shadow: "#000000",
 };

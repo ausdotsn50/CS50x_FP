@@ -81,7 +81,7 @@ export default function SignUpScreen() {
         {/* If there's an error, display the UI below */}
         {error ? (
           <View style={styles.errorBox}>
-            <Ionicons name="alert-circle" size={20} color={COLORS.expense}/>
+            <Ionicons name="alert-circle" size={20} color={COLORS.redShd}/>
             <Text style={styles.errorText}>{error}</Text>
             <TouchableOpacity onPress={() => setError("")}>
               <Ionicons name="close" size={20} color={COLORS.textLight}/>
@@ -123,7 +123,7 @@ export default function SignUpScreen() {
         {/* Add error checker here */}
         {error ? (
           <View style={styles.errorBox}>
-            <Ionicons name="alert-circle" size={20} color={COLORS.expense}/>
+            <Ionicons name="alert-circle" size={20} color={COLORS.redShd}/>
             <Text style={styles.errorText}>{error}</Text>
             <TouchableOpacity onPress={() => setError("")}>
               <Ionicons name="close" size={20} color={COLORS.textLight}/>
