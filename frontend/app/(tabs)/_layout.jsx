@@ -3,6 +3,8 @@ import { Tabs } from 'expo-router';
 import { useUser } from '@clerk/clerk-expo';
 import { Ionicons, FontAwesome, FontAwesome5, FontAwesome6 } from "@expo/vector-icons";
 import { COLORS } from "@/constants/color.js";
+import { BlurView } from 'expo-blur';
+import { StyleSheet } from 'react-native';
 
 export default function TabLayout() {
   const { isSignedIn } = useUser();
@@ -19,6 +21,12 @@ export default function TabLayout() {
           fontSize: 12,
           fontWeight: '300',
         },
+
+        // Cp from react navigation doc
+        tabBarStyle: { position: 'absolute' },
+        tabBarBackground: () => (
+          <BlurView tint="light" intensity={100} style={StyleSheet.absoluteFill} />
+        ),
       }}
     >
       <Tabs.Screen
