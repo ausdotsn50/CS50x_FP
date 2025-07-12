@@ -2,6 +2,7 @@
 // subject to modification
 const oceanTheme = {
   primary: "#0277BD",
+  primReduc: "rgba(2, 119, 189, 0.5)",
   background: "#E1F5FE",
   text: "#01579B",
   border: "#B3E5FC",

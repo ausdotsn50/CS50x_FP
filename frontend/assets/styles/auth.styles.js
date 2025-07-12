@@ -33,7 +33,7 @@ export const styles = StyleSheet.create({
     
   },
   errorInput: {
-    borderColor: COLORS.expense,
+    borderColor: COLORS.redShd,
   },
   button: {
     backgroundColor: COLORS.primary,
@@ -97,7 +97,7 @@ export const styles = StyleSheet.create({
     padding: 12,
     borderRadius: 8,
     borderLeftWidth: 4,
-    borderLeftColor: COLORS.expense,
+    borderLeftColor: COLORS.redShd,
     marginBottom: 16,
     flexDirection: "row",
     alignItems: "center",
