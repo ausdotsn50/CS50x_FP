@@ -7,10 +7,9 @@ const router = express.Router();
 router.get("/", async(req,res) => {
     try {
         const overview = await sql`
-            SELECT customers.name, address, products.item, base_price, quantity, type FROM orders
+            SELECT customers.name, customers.address, products.item, products.base_price, products.quantity, products.type FROM orders
             JOIN customers ON orders.customer_id = customers.id
             JOIN products ON orders.product_id = products.id
-            WHERE customer_id = 1
         `;
         
         // Overview as a dict
@@ -37,23 +36,43 @@ router.get("/", async(req,res) => {
 
 
     } catch(error) {
-        console.log("Some error")
+        console.log("Error fetching all orders")
     }
 });
+
+// Able to fetch orders by user id
+router.get("/:userId", async (req, res) => {
+  try {
+    const { userId } = req.params;
+
+    const orders = await sql`
+        SELECT * FROM orders WHERE user_id = ${userId}
+        ORDER BY created_at DESC
+    `;
+    console.log("Successfully fetched orders from userId: ", userId);
+    // adding response status
+    res.status(200).json(orders);
+  } catch (error) {
+    console.error("Error fetching orders for userId:", error);
+    res.status(500).send("Internal server error");
+  }
+});
+
+
 
 router.post("/", async(req,res) => {
     // get the fields that user wants to send
     try {
         // id here is for sale.identification
-        const { product_id, customer_id, quantity, type } = req.body;
+        const { user_id, product_id, customer_id, quantity, type } = req.body;
 
-        if(!product_id || !customer_id || !quantity || !type) {
+        if(!user_id || !product_id || !customer_id || !quantity || !type) {
             return res.status(400).json({ message: "All fields are required" });
         }
 
         const order = await sql`
-            INSERT INTO orders(product_id, customer_id, quantity, type)
-            VALUES (${product_id}, ${customer_id}, ${quantity}, ${type})
+            INSERT INTO orders(user_id, product_id, customer_id, quantity, type)
+            VALUES (${user_id}, ${product_id}, ${customer_id}, ${quantity}, ${type})
             RETURNING *
         `;
         console.log(order);
@@ -61,9 +80,11 @@ router.post("/", async(req,res) => {
     } catch(error) {
         // error posting a sale
         // server side error
-        console.log("Error creating the transaction", error);
+        console.log("Error creating the order", error);
         res.status(500).json({ message: "Internal server error" });
     }
 });
+
+// Add fetching order via userId
 
 export default router;

@@ -8,7 +8,7 @@ router.post("/", async(req,res) => {
         const { user_id, item, base_price } = req.body; // add something for error handling
         
         const product = await sql`
-            INSERT INTO products(user_id, name, base_price)
+            INSERT INTO products(user_id, item, base_price)
             VALUES (${user_id}, ${item}, ${base_price})
             RETURNING *
         `;
