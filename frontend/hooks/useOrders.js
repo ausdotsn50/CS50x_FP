@@ -7,8 +7,8 @@ export const useOrders = (userId) => {
     const[orders, setOrders] = useState([]); // orders state that is going to be an empty array --> array of orders will be stored here
     const[summary, setSummary] = useState({
         revenue: 0,
-        walkins: 0,
-        delivers: 0,
+        walkin: 0,
+        deliver: 0,
     }); // state that keeps track of summary
     // subject to update
     const[isLoading, setIsLoading] = useState(true); // set to true so it is fetched immediately
