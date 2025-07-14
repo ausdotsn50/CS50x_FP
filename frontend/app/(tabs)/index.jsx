@@ -6,13 +6,12 @@ import { SignOutButton } from '@/components/SignOutButton';
 import { useOrders } from "../../hooks/useOrders";
 import { useEffect } from 'react';
 import PageLoader from "../../components/PageLoader";
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { styles } from "@/assets/styles/auth.styles.js";
 
 export default function Home() {
   const { user } = useUser();
   const { orders, summary, isLoading, loadData } = useOrders(user.id)
-  
+
   // console.log("user id:", user.id);
 
   // Call orders hook
@@ -20,7 +19,6 @@ export default function Home() {
     loadData()
   }, [loadData]);
 
-  
   console.log("summary: ", summary);
 
   if(isLoading) return <PageLoader />;
