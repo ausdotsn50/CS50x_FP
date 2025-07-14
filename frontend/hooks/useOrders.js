@@ -2,7 +2,7 @@ import { useCallback, useState } from "react"
 
 const API_URL = "http://localhost:5001/api"
 
-// react custom hook
+// react custom hook follow-along
 export const useOrders = (userId) => {
     const[orders, setOrders] = useState([]); // orders state that is going to be an empty array --> array of orders will be stored here
     const[summary, setSummary] = useState({
@@ -71,3 +71,5 @@ export const useOrders = (userId) => {
 
     return { orders, summary, isLoading, loadData };
 }
+
+// deploy API in render.com
