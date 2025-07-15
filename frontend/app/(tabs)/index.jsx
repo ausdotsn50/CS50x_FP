@@ -57,16 +57,18 @@ export default function Home() {
           <View style={styles.headerRight}>
             <SignOutButton />
           </View>
+          
         </View>
 
-        {/* Place for summary card */}
+          {/* Place for summary card */}
           <View style={styles.reportCard}>
             <Text style={styles.reportTitle}>{day} Report | {formattedDate}</Text>
 
+            {/* L and R report divisions */}
             <View style={styles.report}>
               <View>
                 <Text style={styles.revenueAmount}>Php {parseFloat(summary.revenue).toFixed(2)}</Text>
-                <Text style={styles.topRevenueTitle}>Top Revenue Contributor Today</Text>
+                <Text style={styles.topRevenueTitle}>Top Revenue Contributor</Text>
                 <Text style={styles.topRevenueText}>RJ | Lagundi Area</Text>
                 <Text style={styles.topRevenueText}>7 Water Dispenser Jugs</Text>
               </View>
@@ -82,15 +84,10 @@ export default function Home() {
                   <Text style={styles.walkins}>{summary.walkins[0].count}</Text>
                 </View>
               </View>
-
             </View>
-
-
-
-
-      
           </View>
 
+          
       </View>
     </View>
   );

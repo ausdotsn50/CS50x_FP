@@ -103,7 +103,7 @@ export const styles = StyleSheet.create({
     backgroundColor: COLORS.card,
     borderRadius: 20,
     padding: 10,
-    marginBottom: 15,
+    marginBottom: 5,
     shadowColor: COLORS.shadow,
     shadowOffset: {
       width: 0,
