@@ -7,8 +7,8 @@ export const useOrders = (userId) => {
     const[orders, setOrders] = useState([]); // orders state is going to be an empty array --> array of orders will be stored here
     const[summary, setSummary] = useState({
         revenue: 0,
-        walkins: 0,
         delivers: 0,
+        walkins: 0,
     }); // state that keeps track of summary --> COALESCE in postgresql
     const[isLoading, setIsLoading] = useState(true); // set to true so it is fetched immediately : after fetching is set to false
     
