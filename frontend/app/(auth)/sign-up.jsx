@@ -37,7 +37,6 @@ export default function SignUpScreen() {
       // and capture OTP code
       setPendingVerification(true)
     } catch (err) {
-        // console.error(JSON.stringify(err, null, 2))
         setError(err.errors?.[0]?.longMessage);
     }
   }

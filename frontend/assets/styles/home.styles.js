@@ -166,7 +166,7 @@ export const styles = StyleSheet.create({
     color: COLORS.text,
     marginBottom: 15,
   },
-  transactionCard: {
+  orderCard: {
     backgroundColor: COLORS.card,
     borderRadius: 12,
     marginBottom: 10,
@@ -181,7 +181,7 @@ export const styles = StyleSheet.create({
     shadowRadius: 2,
     elevation: 2,
   },
-  transactionContent: {
+  orderContent: {
     flex: 1,
     flexDirection: "row",
     padding: 15,
@@ -196,28 +196,29 @@ export const styles = StyleSheet.create({
     alignItems: "center",
     marginRight: 12,
   },
-  transactionLeft: {
+  orderLeft: {
     flex: 1,
   },
-  transactionTitle: {
+  orderTitle: {
     fontSize: 16,
     fontWeight: "500",
     color: COLORS.text,
     marginBottom: 4,
   },
-  transactionCategory: {
+  orderType: {
     fontSize: 14,
     color: COLORS.textLight,
   },
-  transactionRight: {
+  orderRight: {
     alignItems: "flex-end",
   },
-  transactionAmount: {
+  orderAmount: {
     fontSize: 16,
     fontWeight: "600",
     marginBottom: 4,
+    color: COLORS.grnShd,
   },
-  transactionDate: {
+  orderDate: {
     fontSize: 12,
     color: COLORS.textLight,
   },
@@ -226,7 +227,7 @@ export const styles = StyleSheet.create({
     borderLeftWidth: 1,
     borderLeftColor: COLORS.border,
   },
-  transactionsContainer: {
+  ordersContainer: {
     marginBottom: 20,
   },
   loadingContainer: {
@@ -282,18 +283,18 @@ export const styles = StyleSheet.create({
     fontWeight: "600",
     marginLeft: 6,
   },
-  transactionsHeaderContainer: {
+  ordersHeaderContainer: {
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
     marginBottom: 10,
     paddingBottom: 5,
   },
-  transactionsList: {
+  ordersList: {
     flex: 1,
     marginHorizontal: 20,
   },
-  transactionsListContent: {
+  ordersListContent: {
     paddingBottom: 20,
   },
 });

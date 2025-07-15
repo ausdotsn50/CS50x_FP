@@ -1,16 +1,16 @@
 import PageLoader from "../../components/PageLoader";
 
+import { Alert, FlatList, Image, Text, View } from 'react-native';
+import { OrdersItem } from "../../components/OrdersItem";
 import { SignOutButton } from '@/components/SignOutButton';
 import { styles } from "@/assets/styles/home.styles.js";
-import { FlatList, Image, Text, View } from 'react-native';
 import { useEffect } from 'react';
 import { useOrders } from "../../hooks/useOrders";
 import { useUser } from '@clerk/clerk-expo';
 
-
 export default function Home() {
   const { user } = useUser();
-  const { orders, summary, isLoading, loadData } = useOrders(user.id)
+  const { orders, summary, isLoading, loadData, deleteOrder } = useOrders(user.id)
   const currentDate = new Date(); // date today
 
   const options1 = { year: 'numeric', month: 'long', day: 'numeric' };
@@ -26,8 +26,15 @@ export default function Home() {
     loadData()
   }, [loadData]);
 
-  console.log("orders: ", orders);
-  console.log("summary: ", summary);
+  // console.log("orders: ", orders);
+  // console.log("summary: ", summary);
+
+  const handleDelete = (id) => {
+    Alert.alert("Delete Transaction", "Are you sure you want to delete this transaction?", [
+      { text: "Cancel", style: "cancel"},
+      { text: "Delete", style: "destructive", onPress: () => deleteOrder(id)},
+    ]);
+  };
 
   if(isLoading) return <PageLoader />;
 
@@ -81,7 +88,7 @@ export default function Home() {
                 </View>
 
                 <View style={styles.reportMiniCard}>
-                  <Text style={styles.walkins}>Walk-ins</Text>
+                  <Text style={styles.walkins}>Walk-Ins</Text>
                   <Text style={styles.walkins}>{summary.walkins[0].count}</Text>
                 </View>
               </View>
@@ -90,18 +97,21 @@ export default function Home() {
           </View>
         
         {/* Start of logging all transactions */}
-        <View style={styles.transactionsHeaderContainer}>
+        <View style={styles.ordersHeaderContainer}>
           <Text style={styles.sectionTitle}>Recent Orders</Text>
         </View>
 
           
       </View>
-
+      
       {/* FlastList used for performance reasons, for rendering in particular */}
       <FlatList
-        style={styles.transactionsList}
+        style={styles.ordersList}
         contentContainerStyle={styles.transactionsListContent}
         data={orders}
+        renderItem={({item}) => (
+          <OrdersItem item={item} onDelete={handleDelete}/>
+        )}
       />
     </View>
   );

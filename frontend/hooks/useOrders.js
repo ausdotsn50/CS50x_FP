@@ -1,4 +1,5 @@
 import { useCallback, useState } from "react"
+import { Alert } from "react-native";
 
 const API_URL = "http://localhost:5001/api"
 
@@ -29,7 +30,7 @@ export const useOrders = (userId) => {
             const data = await response.json();
             setOrders(data);
         } catch(error) {
-            console.log("Error fetching orders", error);
+            console.error("Error fetching orders: ", error);
         }
     }, [userId]);
 
@@ -39,7 +40,7 @@ export const useOrders = (userId) => {
             const data = await response.json();
             setSummary(data);
         } catch(error) {
-            console.log("Error fetching summarry", error);
+            console.error("Error fetching summary: ", error);
         }
     }, [userId]);
 
@@ -51,7 +52,7 @@ export const useOrders = (userId) => {
         try {
             await Promise.all([fetchOrders(), fetchSummary()]);
         } catch(error) {
-            console.error("Error loading data:", error);
+            console.error("Error loading data: ", error);
         } finally {
             setIsLoading(false); // after fetching set to false
         }
@@ -59,6 +60,18 @@ export const useOrders = (userId) => {
 
     // loadData used to refresh UI
     // To do: add delete functionality
+    const deleteOrder = useCallback(async(id) => {
+        try {
+            const response = await fetch(`${API_URL}/orders/${id}`, { method : "DELETE"});
+            if (!response.ok) throw new Error("Failed to delete order");
 
-    return { orders, summary, isLoading, loadData };
+            loadData();
+            Alert.alert("Success", "Order deleted successfully");
+        } catch(error) {
+            console.error("Error deleting order: ", error); 
+            Alert.alert("An error occurred", error.message);
+        }
+    });
+
+    return { orders, summary, isLoading, loadData, deleteOrder };
 }
