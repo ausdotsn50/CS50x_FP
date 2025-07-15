@@ -72,6 +72,6 @@ export const useOrders = (userId) => {
             Alert.alert("An error occurred", error.message);
         }
     });
-
+    
     return { orders, summary, isLoading, loadData, deleteOrder };
 }
