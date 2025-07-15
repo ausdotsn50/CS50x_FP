@@ -1,12 +1,14 @@
 // To do
 // Home page
-import { useUser } from '@clerk/clerk-expo';
-import { Text, View } from 'react-native';
-import { SignOutButton } from '@/components/SignOutButton';
-import { useOrders } from "../../hooks/useOrders";
-import { useEffect } from 'react';
 import PageLoader from "../../components/PageLoader";
+
+import { SignOutButton } from '@/components/SignOutButton';
 import { styles } from "@/assets/styles/auth.styles.js";
+import { Text, View } from 'react-native';
+import { useEffect } from 'react';
+import { useOrders } from "../../hooks/useOrders";
+import { useUser } from '@clerk/clerk-expo';
+
 
 export default function Home() {
   const { user } = useUser();
@@ -19,6 +21,7 @@ export default function Home() {
     loadData()
   }, [loadData]);
 
+  console.log("orders: ", orders);
   console.log("summary: ", summary);
 
   if(isLoading) return <PageLoader />;

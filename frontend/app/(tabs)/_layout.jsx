@@ -1,14 +1,12 @@
-import { Redirect } from 'expo-router';
-import { Tabs } from 'expo-router';
-import { useUser } from '@clerk/clerk-expo';
-import { Ionicons, FontAwesome, FontAwesome5, FontAwesome6 } from "@expo/vector-icons";
-import { COLORS } from "@/constants/color.js";
 import { BlurView } from 'expo-blur';
+import { COLORS } from "@/constants/color.js";
+import { FontAwesome, FontAwesome5, FontAwesome6, Ionicons } from "@expo/vector-icons";
+import { Redirect, Tabs } from 'expo-router';
 import { StyleSheet } from 'react-native';
+import { useUser } from '@clerk/clerk-expo';
 
 export default function TabLayout() {
   const { isSignedIn } = useUser();
-
   if (!isSignedIn) return <Redirect href={"/sign-in"} />;
 
   return (
@@ -68,6 +66,7 @@ export default function TabLayout() {
           ),
         }}
       />
+      
     </Tabs>
   );
 }

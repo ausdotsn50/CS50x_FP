@@ -2,27 +2,26 @@ import { useCallback, useState } from "react"
 
 const API_URL = "http://localhost:5001/api"
 
-// react custom hook follow-along
+// react custom hook
 export const useOrders = (userId) => {
-    const[orders, setOrders] = useState([]); // orders state that is going to be an empty array --> array of orders will be stored here
+    const[orders, setOrders] = useState([]); // orders state is going to be an empty array --> array of orders will be stored here
     const[summary, setSummary] = useState({
         revenue: 0,
-        walkin: 0,
-        deliver: 0,
-    }); // state that keeps track of summary
-    // subject to update
-    const[isLoading, setIsLoading] = useState(true); // set to true so it is fetched immediately
-    // after fetching is set to false
-
+        walkins: 0,
+        delivers: 0,
+    }); // state that keeps track of summary --> COALESCE in postgresql
+    const[isLoading, setIsLoading] = useState(true); // set to true so it is fetched immediately : after fetching is set to false
+    
     /* useCallback 
-        useCallback takes two arguments: 
-        a function and a dependency array. 
+        - takes two arguments: a function and a dependency array
+        - arg1: whole callback func, arg2: userId
         
         It "memoizes" (caches) the provided function, 
         meaning it will only recreate the function if 
         one of the values in its dependency array changes
 
         - preventing unnecessary re-renders of components
+        
     */
     const fetchOrders = useCallback(async() => {
         try {
@@ -33,8 +32,6 @@ export const useOrders = (userId) => {
             console.log("Error fetching orders", error);
         }
     }, [userId]);
-
-    // arg1: whole callback func, arg2: userId
 
     const fetchSummary = useCallback(async() => {
         try {
@@ -52,12 +49,6 @@ export const useOrders = (userId) => {
         setIsLoading(true);
 
         try {
-            // functions can be run simultaneously
-            /* Instead of
-                await fetchOrders
-                await fetchSummary    
-            */
-
             await Promise.all([fetchOrders(), fetchSummary()]);
         } catch(error) {
             console.error("Error loading data:", error);
@@ -66,10 +57,8 @@ export const useOrders = (userId) => {
         }
     },[fetchOrders, fetchSummary, userId]);
 
-    // loadData to refresh UI
-    // add delete functionality
+    // loadData used to refresh UI
+    // To do: add delete functionality
 
     return { orders, summary, isLoading, loadData };
 }
-
-// deploy API in render.com
