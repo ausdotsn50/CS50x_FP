@@ -2,7 +2,7 @@ import PageLoader from "../../components/PageLoader";
 
 import { SignOutButton } from '@/components/SignOutButton';
 import { styles } from "@/assets/styles/home.styles.js";
-import { Image, Text, TouchableOpacity, View } from 'react-native';
+import { FlatList, Image, Text, View } from 'react-native';
 import { useEffect } from 'react';
 import { useOrders } from "../../hooks/useOrders";
 import { useUser } from '@clerk/clerk-expo';
@@ -57,7 +57,7 @@ export default function Home() {
           <View style={styles.headerRight}>
             <SignOutButton />
           </View>
-          
+
         </View>
 
           {/* Place for summary card */}
@@ -66,6 +66,7 @@ export default function Home() {
 
             {/* L and R report divisions */}
             <View style={styles.report}>
+              
               <View>
                 <Text style={styles.revenueAmount}>Php {parseFloat(summary.revenue).toFixed(2)}</Text>
                 <Text style={styles.topRevenueTitle}>Top Revenue Contributor</Text>
@@ -84,11 +85,24 @@ export default function Home() {
                   <Text style={styles.walkins}>{summary.walkins[0].count}</Text>
                 </View>
               </View>
+
             </View>
           </View>
+        
+        {/* Start of logging all transactions */}
+        <View style={styles.transactionsHeaderContainer}>
+          <Text style={styles.sectionTitle}>Recent Orders</Text>
+        </View>
 
           
       </View>
+
+      {/* FlastList used for performance reasons, for rendering in particular */}
+      <FlatList
+        style={styles.transactionsList}
+        contentContainerStyle={styles.transactionsListContent}
+        data={orders}
+      />
     </View>
   );
 }
