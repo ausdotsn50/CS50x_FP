@@ -27,7 +27,8 @@ export default function Home() {
   }, [loadData]);
 
   // console.log("orders: ", orders);
-  // console.log("summary: ", summary);
+  console.log("summary: ", summary);
+  
 
   const handleDelete = (id) => {
     Alert.alert("Delete Transaction", "Are you sure you want to delete this transaction?", [
@@ -37,6 +38,8 @@ export default function Home() {
   };
 
   if(isLoading) return <PageLoader />;
+  
+  const topItem = summary.topRevContri[0].quantity > 1 ? summary.topRevContri[0].item + "s" :  summary.topRevContri[0].item;
 
   return (
     <View style={styles.container}>
@@ -75,10 +78,10 @@ export default function Home() {
             <View style={styles.report}>
               
               <View>
-                <Text style={styles.revenueAmount}>Php {parseFloat(summary.revenue).toFixed(2)}</Text>
+                <Text style={styles.revenueAmount}>Php {parseFloat(summary.revenue[0].rev).toFixed(2)}</Text>
                 <Text style={styles.topRevenueTitle}>Top Revenue Contributor</Text>
-                <Text style={styles.topRevenueText}>RJ | Lagundi Area</Text>
-                <Text style={styles.topRevenueText}>7 Water Dispenser Jugs</Text>
+                <Text style={styles.topRevenueText}>{summary.topRevContri[0].name} | {summary.topRevContri[0].address} Area</Text>
+                <Text style={styles.topRevenueText}>{summary.topRevContri[0].quantity} {topItem}</Text>
               </View>
 
               <View>
