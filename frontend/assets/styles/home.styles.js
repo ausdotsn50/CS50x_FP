@@ -3,15 +3,15 @@ import { StyleSheet } from "react-native";
 import { COLORS } from "@/constants/color.js";
 
 export const styles = StyleSheet.create({
-  container: { // used
+  container: {
     flex: 1,
     backgroundColor: COLORS.background,
   },
-  content: { // used
+  content: {
     padding: 20,
     paddingBottom: 0,
   },
-  header: { // used
+  header: {
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
@@ -19,34 +19,34 @@ export const styles = StyleSheet.create({
     paddingHorizontal: 0,
     paddingVertical: 12,
   },
-  headerLogo: { // used
+  headerLogo: {
     width: 75,
     height: 75,
   },
-  headerLeft: { // used
+  headerLeft: {
     flex: 1,
     flexDirection: "row",
     alignItems: "center",
   },
-  headerRight: { // used
+  headerRight: {
     flexDirection: "row",
     alignItems: "center",
     gap: 12,
   },
-  welcomeContainer: { // used
+  welcomeContainer: {
     flex: 1,
   },
-  welcomeText: { // used
+  welcomeText: {
     fontSize: 14,
     color: COLORS.textLight,
     marginBottom: 2,
   },
-  usernameText: { // used
+  usernameText: {
     fontSize: 16,
     fontWeight: "600",
     color: COLORS.text,
   },
-  logoutButton: { // used
+  logoutButton: {
     padding: 10,
     borderRadius: 20,
     backgroundColor: COLORS.card,
@@ -56,13 +56,13 @@ export const styles = StyleSheet.create({
     shadowRadius: 2,
     elevation: 1,
   },
-  report: { // used
+  report: {
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "flex-start",
     paddingHorizontal: 0,
   },
-  reportCard: { // used
+  reportCard: {
     backgroundColor: COLORS.card,
     borderRadius: 20,
     padding: 20,
@@ -76,12 +76,12 @@ export const styles = StyleSheet.create({
     shadowRadius: 3,
     elevation: 3,
   },
-  reportTitle: { // used
+  reportTitle: {
     fontSize: 16,
     color: COLORS.textLight,
     marginBottom: 8,
   },
-  revenueAmount: { // used
+  revenueAmount: {
     fontSize: 32,
     fontWeight: "bold",
     color: COLORS.text,
@@ -99,7 +99,7 @@ export const styles = StyleSheet.create({
     fontSize: 12,
     color: COLORS.text,
   },
-  reportMiniCard: { // used
+  reportMiniCard: {
     backgroundColor: COLORS.card,
     borderRadius: 20,
     padding: 10,
@@ -113,31 +113,13 @@ export const styles = StyleSheet.create({
     shadowRadius: 3,
     elevation: 3,
   },
-  delivers: { // used
+  delivers: {
     textAlign: "center",
     color: COLORS.redShd,
   },
-  walkins: { // used
+  walkins: {
     textAlign: "center",
     color: COLORS.grnShd,
-  },
-  addButton: {
-    backgroundColor: COLORS.primary,
-    paddingHorizontal: 16,
-    paddingVertical: 10,
-    borderRadius: 24,
-    flexDirection: "row",
-    alignItems: "center",
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
-    elevation: 3,
-  },
-  addButtonText: {
-    color: COLORS.white,
-    fontWeight: "600",
-    marginLeft: 4,
   },
   summaryStats: {
     flexDirection: "row",
@@ -227,61 +209,11 @@ export const styles = StyleSheet.create({
     borderLeftWidth: 1,
     borderLeftColor: COLORS.border,
   },
-  ordersContainer: {
-    marginBottom: 20,
-  },
-  loadingContainer: {
+  loadingContainer: { // uzsed
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
     backgroundColor: COLORS.background,
-  },
-  emptyState: {
-    backgroundColor: COLORS.card,
-    borderRadius: 16,
-    padding: 30,
-    alignItems: "center",
-    justifyContent: "center",
-    marginTop: 10,
-    shadowColor: COLORS.shadow,
-    shadowOffset: { width: 0, height: 1 },
-    shadowOpacity: 0.1,
-    shadowRadius: 2,
-    elevation: 2,
-  },
-  emptyStateIcon: {
-    marginBottom: 16,
-  },
-  emptyStateTitle: {
-    fontSize: 18,
-    fontWeight: "600",
-    color: COLORS.text,
-    marginBottom: 8,
-  },
-  emptyStateText: {
-    color: COLORS.textLight,
-    fontSize: 14,
-    textAlign: "center",
-    marginBottom: 20,
-    lineHeight: 20,
-  },
-  emptyStateButton: {
-    backgroundColor: COLORS.primary,
-    flexDirection: "row",
-    alignItems: "center",
-    paddingVertical: 10,
-    paddingHorizontal: 16,
-    borderRadius: 20,
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 3,
-    elevation: 2,
-  },
-  emptyStateButtonText: {
-    color: COLORS.white,
-    fontWeight: "600",
-    marginLeft: 6,
   },
   ordersHeaderContainer: {
     flexDirection: "row",

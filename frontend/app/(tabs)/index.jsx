@@ -31,7 +31,7 @@ export default function Home() {
   
 
   const handleDelete = (id) => {
-    Alert.alert("Delete Transaction", "Are you sure you want to delete this transaction?", [
+    Alert.alert("Delete Order", "Are you sure you want to delete this order?", [
       { text: "Cancel", style: "cancel"},
       { text: "Delete", style: "destructive", onPress: () => deleteOrder(id)},
     ]);
@@ -99,7 +99,7 @@ export default function Home() {
             </View>
           </View>
         
-        {/* Start of logging all transactions */}
+        {/* Start of logging all orders */}
         <View style={styles.ordersHeaderContainer}>
           <Text style={styles.sectionTitle}>Recent Orders</Text>
         </View>
@@ -110,11 +110,12 @@ export default function Home() {
       {/* FlastList used for performance reasons, for rendering in particular */}
       <FlatList
         style={styles.ordersList}
-        contentContainerStyle={styles.transactionsListContent}
+        contentContainerStyle={styles.ordersListContent}
         data={orders}
         renderItem={({item}) => (
           <OrdersItem item={item} onDelete={handleDelete}/>
         )}
+        ListEmptyComponent={<Text>No orders made yet</Text>}
       />
     </View>
   );
