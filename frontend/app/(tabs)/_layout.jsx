@@ -6,7 +6,9 @@ import { StyleSheet } from 'react-native';
 import { useUser } from '@clerk/clerk-expo';
 
 export default function TabLayout() {
-  const { isSignedIn } = useUser();
+  const { isSignedIn, isLoaded } = useUser();
+  
+  if(!isLoaded) return null; // ux purposes
   if (!isSignedIn) return <Redirect href={"/sign-in"} />;
 
   return (

@@ -3,14 +3,6 @@ import { StyleSheet } from "react-native";
 import { COLORS } from "@/constants/color.js";
 
 export const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: COLORS.background,
-  },
-  content: {
-    padding: 20,
-    paddingBottom: 0,
-  },
   header: {
     flexDirection: "row",
     justifyContent: "space-between",
@@ -228,5 +220,21 @@ export const styles = StyleSheet.create({
   },
   ordersListContent: {
     paddingBottom: 20,
+  },
+  emptyState: {
+    borderRadius: 16,
+    alignItems: "center",
+    justifyContent: "center",
+    shadowColor: COLORS.shadow,
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.1,
+    shadowRadius: 2,
+    elevation: 2,
+  },
+  emptyStateTitle: {
+    fontSize: 15,
+    fontWeight: "600",
+    color: COLORS.text,
+    marginBottom: 8,
   },
 });

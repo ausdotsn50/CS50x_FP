@@ -1,8 +1,9 @@
 import PageLoader from "../../components/PageLoader";
 
-import { Alert, FlatList, Image, Text, View } from 'react-native';
+import { Alert, FlatList, Image, RefreshControl, Text, View } from 'react-native';
 import { OrdersItem } from "../../components/OrdersItem";
 import { SignOutButton } from '@/components/SignOutButton';
+import { genStyles } from "@/assets/styles/general.styles.js";
 import { styles } from "@/assets/styles/home.styles.js";
 import { useEffect } from 'react';
 import { useOrders } from "../../hooks/useOrders";
@@ -42,8 +43,8 @@ export default function Home() {
   const topItem = summary.topRevContri[0].quantity > 1 ? summary.topRevContri[0].item + "s" :  summary.topRevContri[0].item;
 
   return (
-    <View style={styles.container}>
-      <View style={styles.content}>
+    <View style={genStyles.container}>
+      <View style={genStyles.content}>
         
         {/* HEADER */}
         <View style={styles.header}>
@@ -115,7 +116,11 @@ export default function Home() {
         renderItem={({item}) => (
           <OrdersItem item={item} onDelete={handleDelete}/>
         )}
-        ListEmptyComponent={<Text>No orders made yet</Text>}
+        ListEmptyComponent={
+          <View style={styles.emptyState}>
+            <Text style={styles.emptyStateTitle}>No orders to display yet</Text>
+          </View>
+        }
       />
     </View>
   );
