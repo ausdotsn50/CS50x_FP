@@ -1,19 +1,31 @@
 import { FlatList, TextInput, Text, View } from 'react-native';
 import { styles } from "@/assets/styles/logOrder.styles.js";
-import { genStyles } from '@/assets/styles/general.styles';
+import { genStyles } from '@/assets/styles/general.styles.js';
 import { useState } from 'react';
+import { useCustomers } from "@/hooks/useCustomers.js";
+import { useUser } from '@clerk/clerk-expo';
+import { CustomersItem } from '@/components/CustomersItem';
+import { useEffect  } from 'react';
+import PageLoader from '@/components/PageLoader';
 
 export default function LogOrder() {
-    const [isLoading, setIsLoading] = useState(false);
-    const [data, setData] = useState([]); // fetching data from an API endpoint
-    // const [error, setError] = useState(null);
-    // const [fullData, setFullData] = useState([]);
+    const { user } = useUser();
+    const { customers, isLoading, loadData } = useCustomers(user.id)
     const[searchQuery, setSearchQuery] = useState(""); // by default, an empty string
-
+    
     const handleSearch = (query) => {
         setSearchQuery(query);
     }
-    
+
+    // Call customers hook
+    useEffect(() => {
+        loadData()
+    }, [loadData]);
+
+    console.log("customers: ", customers);
+
+    if(isLoading) return <PageLoader />;
+
     return (
         <View style={genStyles.container}>
             <View style={genStyles.content}>
@@ -27,11 +39,22 @@ export default function LogOrder() {
                     value={searchQuery}
                     onChangeText={(query) => handleSearch(query) }
                 >
-
                 </TextInput>
-                <FlatList
-                />
             </View>
+            {/* Customers list */}
+            <FlatList
+                style={genStyles.itemsList}
+                contentContainerStyle={genStyles.itemsListContent}
+                data={customers}
+                renderItem={({item}) => (
+                    <CustomersItem item={item}/>
+                )}
+                ListEmptyComponent={
+                    <View style={genStyles.emptyState}>
+                    <Text style={genStyles.emptyStateTitle}>No customers to display yet</Text>
+                    </View>
+                }
+            />
         </View>
     );
 }

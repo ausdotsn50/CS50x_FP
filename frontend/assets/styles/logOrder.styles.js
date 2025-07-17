@@ -9,5 +9,7 @@ export const styles = StyleSheet.create({
         borderColor: COLORS.borderDrk,
         borderWidth: 1,
         borderRadius: 8,
+        marginBottom: 20,
+        paddingBottom: 5,
     }
 });

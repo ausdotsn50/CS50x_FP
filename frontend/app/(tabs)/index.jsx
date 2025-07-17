@@ -1,4 +1,4 @@
-import PageLoader from "../../components/PageLoader";
+import PageLoader from "@/components/PageLoader";
 
 import { Alert, FlatList, Image, RefreshControl, Text, View } from 'react-native';
 import { OrdersItem } from "../../components/OrdersItem";
@@ -28,7 +28,7 @@ export default function Home() {
   }, [loadData]);
 
   // console.log("orders: ", orders);
-  console.log("summary: ", summary);
+  // console.log("summary: ", summary);
   
 
   const handleDelete = (id) => {
@@ -101,7 +101,7 @@ export default function Home() {
           </View>
         
         {/* Start of logging all orders */}
-        <View style={styles.ordersHeaderContainer}>
+        <View style={genStyles.itemsHeaderContainer}>
           <Text style={styles.sectionTitle}>Recent Orders</Text>
         </View>
 
@@ -110,15 +110,15 @@ export default function Home() {
       
       {/* FlastList used for performance reasons, for rendering in particular */}
       <FlatList
-        style={styles.ordersList}
-        contentContainerStyle={styles.ordersListContent}
-        data={orders}
+        style={genStyles.itemsList}
+        contentContainerStyle={genStyles.itemsListContent}
+        data={null}
         renderItem={({item}) => (
           <OrdersItem item={item} onDelete={handleDelete}/>
         )}
         ListEmptyComponent={
-          <View style={styles.emptyState}>
-            <Text style={styles.emptyStateTitle}>No orders to display yet</Text>
+          <View style={genStyles.emptyState}>
+            <Text style={genStyles.emptyStateTitle}>No orders to display yet</Text>
           </View>
         }
       />

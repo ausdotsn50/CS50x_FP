@@ -1,0 +1,35 @@
+import { useCallback, useState } from "react"
+
+const API_URL = "http://localhost:5001/api"
+
+// react custom hook
+export const useCustomers = (userId) => {
+    const[customers, setCustomers] = useState([]); // store customers data here
+    const[isLoading, setIsLoading] = useState(true); // set to true so it is fetched immediately : after fetching is set to false
+    
+    const fetchCustomers = useCallback(async() => {
+        try {
+            const response = await fetch(`${API_URL}/customers/${userId}`);
+            const data = await response.json();
+            setCustomers(data);
+        } catch(error) {
+            console.error("Error fetching customers: ", error);
+        }
+    }, [userId]);
+
+    
+    const loadData = useCallback(async() => {
+        if (!userId) return;
+        setIsLoading(true);
+
+        try {
+            await fetchCustomers();
+        } catch(error) {
+            console.error("Error loading data: ", error);
+        } finally {
+            setIsLoading(false); // after fetching set to false
+        }
+    },[fetchCustomers, userId]);
+    
+    return { customers, isLoading, loadData };
+}

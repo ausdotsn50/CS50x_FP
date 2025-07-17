@@ -121,10 +121,6 @@ export const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
   },
-  statDivider: {
-    borderRightWidth: 1,
-    borderColor: COLORS.border,
-  },
   summaryStatLabel: {
     fontSize: 14,
     color: COLORS.textLight,
@@ -140,101 +136,10 @@ export const styles = StyleSheet.create({
     color: COLORS.text,
     marginBottom: 15,
   },
-  orderCard: {
-    backgroundColor: COLORS.card,
-    borderRadius: 12,
-    marginBottom: 10,
-    flexDirection: "row",
-    alignItems: "center",
-    shadowColor: COLORS.shadow,
-    shadowOffset: {
-      width: 0,
-      height: 1,
-    },
-    shadowOpacity: 0.1,
-    shadowRadius: 2,
-    elevation: 2,
-  },
-  orderContent: {
-    flex: 1,
-    flexDirection: "row",
-    padding: 15,
-    alignItems: "center",
-  },
-  categoryIconContainer: {
-    width: 40,
-    height: 40,
-    borderRadius: 20,
-    backgroundColor: "#F5F5F5",
-    justifyContent: "center",
-    alignItems: "center",
-    marginRight: 12,
-  },
-  orderLeft: {
-    flex: 1,
-  },
-  orderTitle: {
-    fontSize: 16,
-    fontWeight: "500",
-    color: COLORS.text,
-    marginBottom: 4,
-  },
-  orderType: {
-    fontSize: 14,
-    color: COLORS.textLight,
-  },
-  orderRight: {
-    alignItems: "flex-end",
-  },
-  orderAmount: {
-    fontSize: 16,
-    fontWeight: "600",
-    marginBottom: 4,
-    color: COLORS.grnShd,
-  },
-  orderDate: {
-    fontSize: 12,
-    color: COLORS.textLight,
-  },
-  deleteButton: {
-    padding: 15,
-    borderLeftWidth: 1,
-    borderLeftColor: COLORS.border,
-  },
   loadingContainer: { // uzsed
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
     backgroundColor: COLORS.background,
-  },
-  ordersHeaderContainer: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    marginBottom: 10,
-    paddingBottom: 5,
-  },
-  ordersList: {
-    flex: 1,
-    marginHorizontal: 20,
-  },
-  ordersListContent: {
-    paddingBottom: 20,
-  },
-  emptyState: {
-    borderRadius: 16,
-    alignItems: "center",
-    justifyContent: "center",
-    shadowColor: COLORS.shadow,
-    shadowOffset: { width: 0, height: 1 },
-    shadowOpacity: 0.1,
-    shadowRadius: 2,
-    elevation: 2,
-  },
-  emptyStateTitle: {
-    fontSize: 15,
-    fontWeight: "600",
-    color: COLORS.text,
-    marginBottom: 8,
   },
 });
