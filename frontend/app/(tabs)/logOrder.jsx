@@ -11,7 +11,7 @@ import { handleDelete } from '@/utils/helpers';
 
 export default function LogOrder() {
     const { user } = useUser();
-    const { customers, isLoading, loadData } = useCustomers(user.id)
+    const { customers, isLoading, loadData, deleteCustomer } = useCustomers(user.id)
     const[searchQuery, setSearchQuery] = useState(""); // by default, an empty string
     
     const handleSearch = (query) => {
@@ -48,7 +48,9 @@ export default function LogOrder() {
                 contentContainerStyle={genStyles.itemsListContent}
                 data={customers}
                 renderItem={({item}) => (
-                    <CustomersItem item={item} onDelete={handleDelete}/>
+                    // Choose customer op
+                    // To do: choose products for customer purchase
+                    <CustomersItem item={item} onDelete={handleDelete} delOp={deleteCustomer}/>
                 )}
                 ListEmptyComponent={
                     <View style={genStyles.emptyState}>

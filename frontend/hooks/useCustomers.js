@@ -30,6 +30,19 @@ export const useCustomers = (userId) => {
             setIsLoading(false); // after fetching set to false
         }
     },[fetchCustomers, userId]);
+
+    const deleteCustomer = useCallback(async(id) => {
+        try {
+            const response = await fetch(`${API_URL}/customers/${id}`, { method : "DELETE"});
+            if (!response.ok) throw new Error("Failed to delete customer");
+
+            loadData();
+            Alert.alert("Success", "Customer deleted successfully");
+        } catch(error) {
+            console.error("Error deleting customer: ", error); 
+            Alert.alert("An error occurred", error.message);
+        }
+    });
     
-    return { customers, isLoading, loadData };
+    return { customers, isLoading, loadData, deleteCustomer };
 }
