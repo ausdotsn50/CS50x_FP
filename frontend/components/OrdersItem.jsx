@@ -24,7 +24,7 @@ export const OrdersItem = ({ item, onDelete }) => {
                     <Text style={genStyles.itemDate}>{formattedDate}</Text>
                 </View>
             </TouchableOpacity>
-            <TouchableOpacity style={genStyles.deleteButton} onPress={() => onDelete(item.id)}>
+            <TouchableOpacity style={genStyles.deleteButton} onPress={() => onDelete(item.id, "order")}>
                 <Feather name="trash-2" size={24} color={COLORS.redShd} />
             </TouchableOpacity>
         </View>

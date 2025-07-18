@@ -1,4 +1,4 @@
-import { FlatList, TextInput, Text, View } from 'react-native';
+import { Alert, FlatList, TextInput, Text, View } from 'react-native';
 import { styles } from "@/assets/styles/logOrder.styles.js";
 import { genStyles } from '@/assets/styles/general.styles.js';
 import { useState } from 'react';
@@ -7,6 +7,7 @@ import { useUser } from '@clerk/clerk-expo';
 import { CustomersItem } from '@/components/CustomersItem';
 import { useEffect  } from 'react';
 import PageLoader from '@/components/PageLoader';
+import { handleDelete } from '@/utils/helpers';
 
 export default function LogOrder() {
     const { user } = useUser();
@@ -47,7 +48,7 @@ export default function LogOrder() {
                 contentContainerStyle={genStyles.itemsListContent}
                 data={customers}
                 renderItem={({item}) => (
-                    <CustomersItem item={item}/>
+                    <CustomersItem item={item} onDelete={handleDelete}/>
                 )}
                 ListEmptyComponent={
                     <View style={genStyles.emptyState}>

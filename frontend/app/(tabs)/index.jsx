@@ -6,8 +6,9 @@ import { SignOutButton } from '@/components/SignOutButton';
 import { genStyles } from "@/assets/styles/general.styles.js";
 import { styles } from "@/assets/styles/home.styles.js";
 import { useEffect } from 'react';
-import { useOrders } from "../../hooks/useOrders";
+import { useOrders } from "@/hooks/useOrders";
 import { useUser } from '@clerk/clerk-expo';
+import { handleDelete } from "@/utils/helpers";
 
 export default function Home() {
   const { user } = useUser();
@@ -29,14 +30,6 @@ export default function Home() {
 
   // console.log("orders: ", orders);
   // console.log("summary: ", summary);
-  
-
-  const handleDelete = (id) => {
-    Alert.alert("Delete Order", "Are you sure you want to delete this order?", [
-      { text: "Cancel", style: "cancel"},
-      { text: "Delete", style: "destructive", onPress: () => deleteOrder(id)},
-    ]);
-  };
 
   if(isLoading) return <PageLoader />;
   
@@ -112,7 +105,7 @@ export default function Home() {
       <FlatList
         style={genStyles.itemsList}
         contentContainerStyle={genStyles.itemsListContent}
-        data={null}
+        data={orders}
         renderItem={({item}) => (
           <OrdersItem item={item} onDelete={handleDelete}/>
         )}
