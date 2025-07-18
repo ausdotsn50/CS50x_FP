@@ -107,7 +107,7 @@ export default function Home() {
         contentContainerStyle={genStyles.itemsListContent}
         data={orders}
         renderItem={({item}) => (
-          <OrdersItem item={item} onDelete={handleDelete}/>
+          <OrdersItem item={item} onDelete={handleDelete} delOp={deleteOrder}/>
         )}
         ListEmptyComponent={
           <View style={genStyles.emptyState}>
