@@ -1,4 +1,4 @@
-import { Alert, FlatList, TextInput, Text, View } from 'react-native';
+import { FlatList, TextInput, Text, View } from 'react-native';
 import { styles } from "@/assets/styles/logOrder.styles.js";
 import { genStyles } from '@/assets/styles/general.styles.js';
 import { useState } from 'react';
@@ -8,14 +8,20 @@ import { CustomersItem } from '@/components/CustomersItem';
 import { useEffect  } from 'react';
 import PageLoader from '@/components/PageLoader';
 import { handleDelete } from '@/utils/helpers';
+import { useRouter } from 'expo-router';
 
 export default function LogOrder() {
     const { user } = useUser();
+    const router = useRouter();
     const { customers, isLoading, loadData, deleteCustomer } = useCustomers(user.id)
     const[searchQuery, setSearchQuery] = useState(""); // by default, an empty string
     
     const handleSearch = (query) => {
         setSearchQuery(query);
+    }
+
+    const createOrder = () => {
+        router.replace("logOrder/orderFor")
     }
 
     // Call customers hook
@@ -50,7 +56,7 @@ export default function LogOrder() {
                 renderItem={({item}) => (
                     // Choose customer op
                     // To do: choose products for customer purchase
-                    <CustomersItem item={item} onDelete={handleDelete} delOp={deleteCustomer}/>
+                    <CustomersItem item={item} onDelete={handleDelete} delOp={deleteCustomer} cardAct={createOrder}/>
                 )}
                 ListEmptyComponent={
                     <View style={genStyles.emptyState}>

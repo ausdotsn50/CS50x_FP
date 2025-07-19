@@ -12,7 +12,7 @@ export const OrdersItem = ({ item, onDelete, delOp }) => {
     return (
         <ItemCard
             title={item.name}
-            type={typeDisplay}
+            subT={typeDisplay}
             rightContent={
                 <>
                     <Text style={genStyles.itemAmount}>Php {((parseFloat(item.base_price) + costAdd) * item.quantity).toFixed(2)}</Text>
@@ -23,6 +23,7 @@ export const OrdersItem = ({ item, onDelete, delOp }) => {
             id={item.id}
             itemType="order"
             delOp = {delOp}
+            cardAction={null}
         />
     )
 }

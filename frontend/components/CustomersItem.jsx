@@ -1,10 +1,6 @@
-import { COLORS } from "@/constants/color.js"
-import Feather from '@expo/vector-icons/Feather';
-import { genStyles } from "@/assets/styles/general.styles.js"
-import { Text, TouchableOpacity, View } from "react-native";
 import { ItemCard } from "./ItemCard";
 
-export const CustomersItem = ({ item, onDelete, delOp }) => {
+export const CustomersItem = ({ item, onDelete, delOp, cardAct}) => {
     return (
         <ItemCard
             title={item.name}
@@ -14,6 +10,7 @@ export const CustomersItem = ({ item, onDelete, delOp }) => {
             id={item.id}
             itemType="customer"
             delOp={delOp}
+            cardAction={cardAct}
         />
     )
 }
