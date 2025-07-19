@@ -1,3 +1,4 @@
+import PageLoader from '@/components/PageLoader';
 import { FlatList, TextInput, Text, View } from 'react-native';
 import { styles } from "@/assets/styles/logOrder.styles.js";
 import { genStyles } from '@/assets/styles/general.styles.js';
@@ -6,15 +7,16 @@ import { useCustomers } from "@/hooks/useCustomers.js";
 import { useUser } from '@clerk/clerk-expo';
 import { CustomersItem } from '@/components/CustomersItem';
 import { useEffect  } from 'react';
-import PageLoader from '@/components/PageLoader';
 import { handleDelete } from '@/utils/helpers';
 import { useRouter } from 'expo-router';
 
 export default function LogOrder() {
-    const router = useRouter();
+    const[searchQuery, setSearchQuery] = useState(""); // by default, an empty string
+    
     const { user } = useUser();
     const { customers, isLoading, loadData, deleteCustomer } = useCustomers(user.id)
-    const[searchQuery, setSearchQuery] = useState(""); // by default, an empty string
+
+    const router = useRouter();
     
     const handleSearch = (query) => {
         setSearchQuery(query);
@@ -28,8 +30,6 @@ export default function LogOrder() {
     useEffect(() => {
         loadData()
     }, [loadData]);
-
-    console.log("customers: ", customers);
 
     if(isLoading) return <PageLoader />;
 
@@ -45,8 +45,7 @@ export default function LogOrder() {
                     style={styles.searchBar}
                     value={searchQuery}
                     onChangeText={(query) => handleSearch(query) }
-                >
-                </TextInput>
+                />
             </View>
             {/* Customers list */}
             <FlatList

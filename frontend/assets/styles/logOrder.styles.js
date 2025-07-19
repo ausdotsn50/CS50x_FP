@@ -1,9 +1,10 @@
 // styles src: https://gist.github.com/burakorkmez/2df88764ee2ba45672af1b98efd7737a
+// styles src: https://www.npmjs.com/package/react-native-element-dropdown
 import { StyleSheet } from "react-native";
 import { COLORS } from "@/constants/color.js";
 
 export const styles = StyleSheet.create({
-    header : {
+    header: {
         flexDirection: "row",
         justifyContent: "flex-end", 
         alignItems: "center",
@@ -13,12 +14,16 @@ export const styles = StyleSheet.create({
     },
     searchBar: {
         paddingHorizontal: 20,
-        paddingVertical: 10, // adjust based on list container
+        paddingVertical: 8, // adjust based on list container
         borderColor: COLORS.borderDrk,
         borderWidth: 1,
         borderRadius: 8,
         marginBottom: 20,
         paddingBottom: 5,
+        fontSize: 16,
+        color: COLORS.shadow,
+        width: "100%",
+        textAlign: "center"
     },
     orderForm: {
         alignItems: "center",
@@ -26,6 +31,12 @@ export const styles = StyleSheet.create({
         paddingHorizontal: 20,
         marginTop: 20,
         zIndex: 1,
+    },
+    orderFormTitle: {
+      fontSize: 24,
+      fontWeight: "600",
+      color: COLORS.text,
+      marginBottom: 30,
     },
     dropdown: {
         height: 50,
@@ -35,7 +46,7 @@ export const styles = StyleSheet.create({
         borderRadius: 8,
         paddingHorizontal: 8,
         backgroundColor: COLORS.card,
-        marginBottom: 20,
+        marginBottom: 30,
         zIndex: 10,
     },
     icon: {
@@ -57,6 +68,9 @@ export const styles = StyleSheet.create({
         textAlign: "center",
     },
     selectedTextStyle: {
+      textAlign: "center",
+      fontWeight: "bold",
+      color: COLORS.border,
       fontSize: 16,
     },
     iconStyle: {
@@ -67,4 +81,8 @@ export const styles = StyleSheet.create({
       height: 40,
       fontSize: 16,
     },
+    itemTextStyle: {
+      color: COLORS.borderDrk,
+      fontSize: 16,
+    }
 });

@@ -1,7 +1,7 @@
 import { useCallback, useState } from "react"
 import { Alert } from "react-native";
 
-const API_URL = "http://localhost:5001/api"
+export const API_URL = "http://localhost:5001/api";
 
 // react custom hook
 export const useOrders = (userId) => {

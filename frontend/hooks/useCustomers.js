@@ -1,6 +1,5 @@
 import { useCallback, useState } from "react"
-
-const API_URL = "http://localhost:5001/api"
+import { API_URL } from "./useOrders";
 
 // react custom hook
 export const useCustomers = (userId) => {

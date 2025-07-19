@@ -1,4 +1,5 @@
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
+import PageLoader from '@/components/PageLoader';
 
 import { COLORS } from "@/constants/color.js"
 import { genStyles } from '@/assets/styles/general.styles.js';
@@ -6,17 +7,30 @@ import { Text, TextInput, TouchableOpacity, View } from 'react-native'
 import { styles } from "@/assets/styles/logOrder.styles.js";
 import { useRouter } from 'expo-router';
 import { CustomDropdown } from '@/components/CustomDropdown';
+import { useProducts } from '@/hooks/useProducts';
+import { useUser } from '@clerk/clerk-expo';
+import { useEffect } from 'react';
 
 const orderFor = () => {
   const router = useRouter();
+  const { user } = useUser();
+  const { products, isLoading, loadData } = useProducts(user.id)
 
   const handleReturn = () => {
     router.back()
   }
 
-  // Order for customer picked {id}
-  // Id for some route to insert the new order
-  
+  // Call products hook
+  useEffect(() => {
+      loadData()
+  }, [loadData]);
+
+  const newProdMap = products.map(product => ({
+    label: product.item,
+    value: product.item,
+  }));
+
+  if(isLoading) return <PageLoader />;
 
   return (
     <View style={genStyles.container}>
@@ -29,17 +43,23 @@ const orderFor = () => {
 
         {/* Container for customer order interface  */}
         <View style={styles.orderForm}>
-          <Text style={genStyles.sectionTitle}>Create an order for Delfa</Text>
-          <CustomDropdown placeholderText="Select product to order"/>
-          <CustomDropdown placeholderText="Select type of order"/>
+          <Text style={styles.orderFormTitle}>Create an order for Delfa</Text>
+          <CustomDropdown 
+            data={newProdMap} 
+            placeholderText="Select product to order"/>
+          <CustomDropdown 
+            data={[
+              { label: 'Walk-in', value: 'walk-in' },
+              { label: 'Deliver', value: 'deliver' },
+            ]}  
+            placeholderText="Select type of order"/>
           <TextInput 
               autoCapitalize='none'
               autoComplete={false}
               autoCorrect={false}
-              placeholder="Select order quantity" 
+              placeholder="Enter order quantity" 
               clearButtonMode='always' 
               style={styles.searchBar}
-              onChangeText={(query) => handleSearch(query) }
           />
         </View>
 

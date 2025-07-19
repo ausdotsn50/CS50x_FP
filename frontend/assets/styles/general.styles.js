@@ -100,5 +100,5 @@ export const genStyles = StyleSheet.create({
     fontWeight: "600",
     color: COLORS.text,
     marginBottom: 15,
-},
+  },
 });
