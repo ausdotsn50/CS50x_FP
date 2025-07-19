@@ -95,4 +95,10 @@ export const genStyles = StyleSheet.create({
     color: COLORS.text,
     marginBottom: 8,
   },
+  sectionTitle: {
+    fontSize: 18,
+    fontWeight: "600",
+    color: COLORS.text,
+    marginBottom: 15,
+},
 });

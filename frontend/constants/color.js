@@ -7,7 +7,6 @@ const oceanTheme = {
   text: "#01579B",
   border: "#B3E5FC",
   borderDrk: "rgba(12, 97, 137, 0.6)",
-  white: "#FFFFFF",
   textLight: "#4FC3F7",
   redShd: "#EF5350",
   grnShd: "#26A69A",

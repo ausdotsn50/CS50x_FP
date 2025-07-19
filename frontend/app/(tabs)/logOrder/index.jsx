@@ -11,8 +11,8 @@ import { handleDelete } from '@/utils/helpers';
 import { useRouter } from 'expo-router';
 
 export default function LogOrder() {
-    const { user } = useUser();
     const router = useRouter();
+    const { user } = useUser();
     const { customers, isLoading, loadData, deleteCustomer } = useCustomers(user.id)
     const[searchQuery, setSearchQuery] = useState(""); // by default, an empty string
     
@@ -21,7 +21,7 @@ export default function LogOrder() {
     }
 
     const createOrder = () => {
-        router.replace("logOrder/orderFor")
+        router.push("logOrder/orderFor")
     }
 
     // Call customers hook

@@ -95,7 +95,7 @@ export default function Home() {
         
         {/* Start of logging all orders */}
         <View style={genStyles.itemsHeaderContainer}>
-          <Text style={styles.sectionTitle}>Recent Orders</Text>
+          <Text style={genStyles.sectionTitle}>Recent Orders</Text>
         </View>
 
           
