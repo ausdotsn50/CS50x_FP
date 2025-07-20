@@ -23,7 +23,9 @@ export const OrdersItem = ({ item, onDelete, delOp }) => {
             id={item.id}
             itemType="order"
             delOp = {delOp}
-            cardAction={null}
+            cardAction={() => {
+                null
+            }}
         />
     )
 }

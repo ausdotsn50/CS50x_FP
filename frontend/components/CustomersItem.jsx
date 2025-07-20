@@ -10,7 +10,7 @@ export const CustomersItem = ({ item, onDelete, delOp, cardAct}) => {
             id={item.id}
             itemType="customer"
             delOp={delOp}
-            cardAction={cardAct}
+            cardAction={cardAct} // function call
         />
     )
 }

@@ -10,11 +10,14 @@ import { CustomDropdown } from '@/components/CustomDropdown';
 import { useProducts } from '@/hooks/useProducts';
 import { useUser } from '@clerk/clerk-expo';
 import { useEffect } from 'react';
+import { useLocalSearchParams } from 'expo-router';
 
 const orderFor = () => {
   const router = useRouter();
   const { user } = useUser();
   const { products, isLoading, loadData } = useProducts(user.id)
+  
+  const { customerId, customerName } = useLocalSearchParams(); // local params passed from logOrder/index.jsx
 
   const handleReturn = () => {
     router.back()
@@ -27,8 +30,11 @@ const orderFor = () => {
 
   const newProdMap = products.map(product => ({
     label: product.item,
-    value: product.item,
+    value: product.id,
   }));
+
+  // console.log(newProdMap);
+  console.log(customerId, customerName);
 
   if(isLoading) return <PageLoader />;
 
@@ -43,7 +49,7 @@ const orderFor = () => {
 
         {/* Container for customer order interface  */}
         <View style={styles.orderForm}>
-          <Text style={styles.orderFormTitle}>Create an order for Delfa</Text>
+          <Text style={styles.orderFormTitle}>Create an order for {customerName}</Text>
           <CustomDropdown 
             data={newProdMap} 
             placeholderText="Select product to order"/>
@@ -71,4 +77,5 @@ const orderFor = () => {
   )
 }
 
+// on submit order: use order route to create a new order for
 export default orderFor;

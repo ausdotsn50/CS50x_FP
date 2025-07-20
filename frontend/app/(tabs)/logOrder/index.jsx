@@ -35,9 +35,15 @@ export default function LogOrder() {
         return cm.name?.toLowerCase().includes(query); // lower case to lower case comparison
     }
 
-    const createOrder = () => {
-        router.push("logOrder/orderFor");
-    }
+    const createOrder = (id, name) => {
+        router.push({
+            pathname: "/logOrder/orderFor",
+            params: {
+                customerId: id,
+                customerName: name,
+            }
+        });
+    };
 
     // Call customers hook
     useEffect(() => {
@@ -45,7 +51,7 @@ export default function LogOrder() {
     }, [loadData]);
 
     useEffect(() => {
-        if(searchQuery.trim() === "") {
+        if(searchQuery.trim() === "") { // currently contained in searchQuery
             setFilteredCustomers(customers);
         }
     },[customers]);
@@ -74,7 +80,8 @@ export default function LogOrder() {
                 renderItem={({item}) => (
                     // Choose customer op
                     // To do: choose products for customer purchase
-                    <CustomersItem item={item} onDelete={handleDelete} delOp={deleteCustomer} cardAct={createOrder}/>
+                    <CustomersItem item={item} onDelete={handleDelete} delOp={deleteCustomer} cardAct={createOrder}
+                    />
                 )}
                 ListEmptyComponent={
                     <View style={genStyles.emptyState}>
