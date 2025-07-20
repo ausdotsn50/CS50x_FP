@@ -59,8 +59,11 @@ const orderFor = () => {
               autoCorrect={false}
               placeholder="Enter order quantity" 
               clearButtonMode='always' 
-              style={styles.searchBar}
+              style={[styles.searchBar, { marginBottom : 0 }]}
           />
+          <TouchableOpacity style={styles.submitButton}>
+              <Text style={styles.subButtonTxt}>Submit Order</Text>
+          </TouchableOpacity>
         </View>
 
       </View>
