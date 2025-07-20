@@ -15,7 +15,7 @@ export const CustomDropdown = ({ placeholderText, data }) => {
                 styles.placeholderStyle,
                 isFocus && { color: COLORS.borderDrk }
             ]}
-            selectedTextStyle={styles.selectedTextStyle}
+            selectedTextStyle={[styles.selectedTextStyle, isFocus && {color : COLORS.borderDrk}]}
             inputSearchStyle={styles.inputSearchStyle}
             iconStyle={styles.iconStyle}
             itemTextStyle={styles.itemTextStyle}
@@ -25,13 +25,16 @@ export const CustomDropdown = ({ placeholderText, data }) => {
             labelField="label"
             valueField="value"
             placeholder={!isFocus ? placeholderText : '...'}
-            searchPlaceholder="Search..."
+            searchPlaceholder="Search"
             value={value}
             onFocus={() => setIsFocus(true)}
             onBlur={() => setIsFocus(false)}
             onChange={item => {
                 setValue(item.value);
                 setIsFocus(false);
+            }}
+            renderRightIcon={() => {
+                null
             }}
         />
     )   

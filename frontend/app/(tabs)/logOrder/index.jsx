@@ -36,13 +36,19 @@ export default function LogOrder() {
     }
 
     const createOrder = () => {
-        router.push("logOrder/orderFor")
+        router.push("logOrder/orderFor");
     }
 
     // Call customers hook
     useEffect(() => {
         loadData()
     }, [loadData]);
+
+    useEffect(() => {
+        if(searchQuery.trim() === "") {
+            setFilteredCustomers(customers);
+        }
+    },[customers]);
 
     if(isLoading) return <PageLoader />;
 
