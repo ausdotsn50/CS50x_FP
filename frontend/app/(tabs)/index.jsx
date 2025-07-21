@@ -1,6 +1,6 @@
 import PageLoader from "@/components/PageLoader";
 
-import { Alert, FlatList, Image, RefreshControl, Text, View } from 'react-native';
+import { FlatList, Image, RefreshControl, Text, View } from 'react-native';
 import { OrdersItem } from "../../components/OrdersItem";
 import { SignOutButton } from '@/components/SignOutButton';
 import { genStyles } from "@/assets/styles/general.styles.js";
@@ -33,7 +33,7 @@ export default function Home() {
 
   if(isLoading) return <PageLoader />;
   
-  const topItem = summary.topRevContri[0].quantity > 1 ? summary.topRevContri[0].item + "s" :  summary.topRevContri[0].item;
+  const topItem = summary.topRevContri.quantity > 1 ? summary.topRevContri.item + "s" :  summary.topRevContri.item;
 
   return (
     <View style={genStyles.container}>
@@ -72,10 +72,25 @@ export default function Home() {
             <View style={styles.report}>
               
               <View>
-                <Text style={styles.revenueAmount}>Php {parseFloat(summary.revenue[0].rev).toFixed(2)}</Text>
+                {summary.revenue[0].rev ? (
+                  <Text style={styles.revenueAmount}>Php {parseFloat(summary.revenue[0].rev).toFixed(2)}</Text>
+                ) : (
+                  <Text style={styles.revenueAmount}>NA</Text>
+                )}
+                
                 <Text style={styles.topRevenueTitle}>Top Revenue Contributor</Text>
-                <Text style={styles.topRevenueText}>{summary.topRevContri[0].name} | {summary.topRevContri[0].address} Area</Text>
-                <Text style={styles.topRevenueText}>{summary.topRevContri[0].quantity} {topItem}</Text>
+                
+                {summary.topRevContri.name ? (
+                  <Text style={styles.topRevenueText}>
+                    {summary.topRevContri.name} | {summary.topRevContri.address} Area
+                  </Text>
+                ) : (
+                  <Text style={styles.topRevenueText}>
+                    NA
+                  </Text>
+                )}
+
+                <Text style={styles.topRevenueText}>{summary.topRevContri.quantity} {topItem}</Text>
               </View>
 
               <View>
