@@ -23,7 +23,7 @@ export default function Home() {
 
   // console.log("user id:", user.id);
 
-  // Call orders hook
+  // Test useFocusEffect
   useEffect(() => {
     loadData()
   }, [loadData]);

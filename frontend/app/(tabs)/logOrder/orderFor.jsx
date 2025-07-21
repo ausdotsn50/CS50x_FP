@@ -11,6 +11,9 @@ import { useProducts } from '@/hooks/useProducts';
 import { useUser } from '@clerk/clerk-expo';
 import { useEffect, useState } from 'react';
 import { useLocalSearchParams } from 'expo-router';
+import { Ionicons } from '@expo/vector-icons';
+import { API_URL } from '../../../hooks/useOrders';
+import { Alert } from 'react-native';
 
 const orderFor = () => {
   const router = useRouter();
@@ -22,6 +25,9 @@ const orderFor = () => {
   const[productValue, setProductValue] = useState(null);
   const[pTypeValue, setPTypeValue] = useState(null);
   const[pQuantValue, setPQuantValue] = useState(null);
+  
+  const[formSubError, setFormSubError] = useState("");
+  const[subLoading, setSubLoading] = useState(false);
 
   // products data
   const newProdMap = products.map(product => ({
@@ -44,20 +50,48 @@ const orderFor = () => {
   const handleReturn = () => {
     router.back()
   }
-
+  
   // Form submission logic and validation
   // Note: includes is an array function
-  const submitForm = () => {
-    if(!productValue || !pTypeValue || !pQuantValue || !productIds.includes(productValue) || 
-      !typeValues.includes(pTypeValue) || isNaN(pQuantValue) || pQuantValue <= 0) {
-        console.log("Form not ready for submission");
-    }
-    else {
-      // To do, add route for submitting orders
-      console.log("Form submitted");
-      console.log(productValue);
-      console.log(pTypeValue);
-      console.log(pQuantValue);
+  const submitForm = async() => {
+    // Input validation section 
+    const quantity = Number(pQuantValue);
+
+    if(!productValue || !pTypeValue || !pQuantValue) {
+      setFormSubError("All fields are required");
+    } else if(!productIds.includes(productValue)) {
+      setFormSubError("Invalid product selected");
+    } else if(!typeValues.includes(pTypeValue)) {
+      setFormSubError("Invalid type selected");
+    } else if(isNaN(quantity) || quantity <= 0) {
+      setFormSubError("Quantity should be a positive integer");
+    } else {
+      // If validation has been passed
+      setSubLoading(true);
+      try {
+        const response = await fetch(`${API_URL}/orders`, {
+          method: "POST",
+          headers: {
+              "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+              userId : user.id,
+              product_id : productValue,
+              customer_id : customerId,
+              quantity: pQuantValue,
+              type: pTypeValue,
+          }),
+      });
+        if (!response.ok) throw new Error("Failed to create order"); // note on delete + create
+      
+        Alert.alert("Success", "Order created successfully");
+        router.replace("/");
+      } catch(error) {
+        console.error("Error creating order: ", error); 
+        Alert.alert("An error occurred", error.message);
+      } finally {
+        setSubLoading(false);
+      }
     }
   }
 
@@ -117,6 +151,16 @@ const orderFor = () => {
               <Text style={styles.subButtonTxt}>Submit Order</Text>
           </TouchableOpacity>
         </View>
+
+        {formSubError ? (
+          <View style={genStyles.errorBox}>
+            <Ionicons name="alert-circle" size={20} color={COLORS.redShd}/>
+            <Text style={[genStyles.errorText, {textAlign : "center"}]}>{formSubError}</Text>
+            <TouchableOpacity onPress={() => setFormSubError("")}>
+              <Ionicons name="close" size={20} color={COLORS.textLight}/>
+            </TouchableOpacity>
+          </View>
+        ) : null}
 
       </View>
     </View>

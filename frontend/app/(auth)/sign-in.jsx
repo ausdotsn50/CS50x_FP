@@ -7,6 +7,7 @@ import { styles } from "@/assets/styles/auth.styles.js";
 import { Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { useSignIn } from '@clerk/clerk-expo';
 import { useState } from 'react';
+import { genStyles } from "../../assets/styles/general.styles";
 
 export default function Page() {
   const { signIn, setActive, isLoaded } = useSignIn()
@@ -60,9 +61,9 @@ export default function Page() {
         <Text style={styles.title}>Welcome Back</Text>
 
         {error ? (
-          <View style={styles.errorBox}>
+          <View style={genStyles.errorBox}>
             <Ionicons name="alert-circle" size={20} color={COLORS.redShd}/>
-            <Text style={styles.errorText}>{error}</Text>
+            <Text style={genStyles.errorText}>{error}</Text>
             <TouchableOpacity onPress={() => setError("")}>
               <Ionicons name="close" size={20} color={COLORS.textLight}/>
             </TouchableOpacity>
@@ -70,7 +71,7 @@ export default function Page() {
         ) : null}
 
         <TextInput
-          style={[styles.input, error && styles.errorInput]}
+          style={[styles.input, error && genStyles.errorInput]}
           autoCapitalize="none"
           value={emailAddress}
           placeholder="Enter email"
@@ -79,7 +80,7 @@ export default function Page() {
         />
 
         <TextInput
-          style={[styles.input, error && styles.errorInput]}
+          style={[styles.input, error && genStyles.errorInput]}
           value={password}
           placeholder="Enter password"
           placeholderTextColor="#9A8478"

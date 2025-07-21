@@ -40,6 +40,7 @@ export const styles = StyleSheet.create({
     shadowOpacity: 0.1,
     shadowRadius: 2,
     elevation: 2,
+    marginBottom: 30,
   },
   orderFormTitle: {
     fontSize: 24,

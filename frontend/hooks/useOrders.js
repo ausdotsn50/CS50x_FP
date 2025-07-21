@@ -22,7 +22,6 @@ export const useOrders = (userId) => {
         one of the values in its dependency array changes
 
         - preventing unnecessary re-renders of components
-        
     */
     const fetchOrders = useCallback(async() => {
         try {
@@ -63,7 +62,7 @@ export const useOrders = (userId) => {
     const deleteOrder = useCallback(async(id) => {
         try {
             const response = await fetch(`${API_URL}/orders/${id}`, { method : "DELETE"});
-            if (!response.ok) throw new Error("Failed to delete order");
+            if (!response.ok) throw new Error("Failed to delete order"); // note on delete + create
 
             loadData();
             Alert.alert("Success", "Order deleted successfully");
@@ -71,7 +70,7 @@ export const useOrders = (userId) => {
             console.error("Error deleting order: ", error); 
             Alert.alert("An error occurred", error.message);
         }
-    });
+    }, [loadData]);
     
     return { orders, summary, isLoading, loadData, deleteOrder };
 }

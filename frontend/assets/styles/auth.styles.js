@@ -32,9 +32,6 @@ export const styles = StyleSheet.create({
     color: COLORS.text,
     
   },
-  errorInput: {
-    borderColor: COLORS.redShd,
-  },
   button: {
     backgroundColor: COLORS.primary,
     borderRadius: 12,
@@ -91,22 +88,5 @@ export const styles = StyleSheet.create({
     letterSpacing: 2,
   },
 
-  // 🔴 Error styles
-  errorBox: {
-    backgroundColor: "#FFE5E5",
-    padding: 12,
-    borderRadius: 8,
-    borderLeftWidth: 4,
-    borderLeftColor: COLORS.redShd,
-    marginBottom: 16,
-    flexDirection: "row",
-    alignItems: "center",
-    width: "100%",
-  },
-  errorText: {
-    color: COLORS.text,
-    marginLeft: 8,
-    flex: 1,
-    fontSize: 14,
-  },
+  
 });

@@ -101,4 +101,25 @@ export const genStyles = StyleSheet.create({
     color: COLORS.text,
     marginBottom: 15,
   },
+  // 🔴 Error styles
+  errorBox: {
+    backgroundColor: "#FFE5E5",
+    padding: 12,
+    borderRadius: 8,
+    borderLeftWidth: 4,
+    borderLeftColor: COLORS.redShd,
+    marginBottom: 16,
+    flexDirection: "row",
+    alignItems: "center",
+    width: "100%",
+  },
+  errorText: {
+    color: COLORS.text,
+    marginLeft: 8,
+    flex: 1,
+    fontSize: 14,
+  },
+  errorInput: {
+    borderColor: COLORS.redShd,
+  },
 });
