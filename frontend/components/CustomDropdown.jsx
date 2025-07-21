@@ -1,11 +1,9 @@
-import { styles } from "@/assets/styles/logOrder.styles.js";
-import { Dropdown } from 'react-native-element-dropdown';
-import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
-import { useState } from 'react';
 import { COLORS } from "@/constants/color.js";
+import { Dropdown } from 'react-native-element-dropdown';
+import { styles } from "@/assets/styles/logOrder.styles.js";
+import { useState } from 'react';
 
-export const CustomDropdown = ({ placeholderText, data }) => {
-    const [value, setValue] = useState(null);
+export const CustomDropdown = ({ placeholderText, data, passedValue, onChangeAct }) => {
     const [isFocus, setIsFocus] = useState(false);
 
     return (
@@ -26,11 +24,11 @@ export const CustomDropdown = ({ placeholderText, data }) => {
             valueField="value"
             placeholder={!isFocus ? placeholderText : '...'}
             searchPlaceholder="Search"
-            value={value}
+            value={passedValue}
             onFocus={() => setIsFocus(true)}
             onBlur={() => setIsFocus(false)}
-            onChange={item => {
-                setValue(item.value);
+            onChange={(item) => {
+                onChangeAct(item);
                 setIsFocus(false);
             }}
             renderRightIcon={() => {

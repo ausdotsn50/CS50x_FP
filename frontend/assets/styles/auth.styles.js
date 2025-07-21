@@ -22,7 +22,7 @@ export const styles = StyleSheet.create({
     textAlign: "center",
   },
   input: {
-    backgroundColor: COLORS.white,
+    backgroundColor: COLORS.card,
     borderRadius: 12,
     padding: 15,
     marginBottom: 16,
@@ -44,7 +44,7 @@ export const styles = StyleSheet.create({
     marginBottom: 20,
   },
   buttonText: {
-    color: COLORS.white,
+    color: COLORS.card,
     fontSize: 18,
     fontWeight: "600",
   },
@@ -78,7 +78,7 @@ export const styles = StyleSheet.create({
     textAlign: "center",
   },
   verificationInput: {
-    backgroundColor: COLORS.white,
+    backgroundColor: COLORS.card,
     borderRadius: 12,
     padding: 15,
     marginBottom: 16,
