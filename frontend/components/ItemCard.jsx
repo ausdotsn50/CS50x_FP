@@ -1,11 +1,12 @@
 import Feather from '@expo/vector-icons/Feather';
+import FontAwesome6 from '@expo/vector-icons/FontAwesome6';
 
 import { COLORS } from "@/constants/color.js"
 import { genStyles } from "@/assets/styles/general.styles.js"
 import { Text, TouchableOpacity, View } from "react-native";
 
 // actual rendering * actual func calls
-export const ItemCard = ({ title, subT, rightContent, onDelete, id, itemType, delOp, cardAction}) => {
+export const ItemCard = ({ title, subT, rightContent, onDelete, id, itemType, delOp, cardAction }) => {
     return (
         <View style={genStyles.itemCard}>
             <TouchableOpacity style={genStyles.itemContent} onPress={() => cardAction(id, title)}> 
@@ -21,8 +22,11 @@ export const ItemCard = ({ title, subT, rightContent, onDelete, id, itemType, de
                 )}
             </TouchableOpacity>
             
+            <TouchableOpacity style={genStyles.editButton} onPress={() => onDelete(id, itemType, delOp)}>
+                <FontAwesome6 name="edit" size={20} color={COLORS.grnShd} />
+            </TouchableOpacity>
             <TouchableOpacity style={genStyles.deleteButton} onPress={() => onDelete(id, itemType, delOp)}>
-                <Feather name="trash-2" size={24} color={COLORS.redShd} />
+                <Feather name="trash-2" size={22} color={COLORS.redShd} />
             </TouchableOpacity>
         </View>
     );

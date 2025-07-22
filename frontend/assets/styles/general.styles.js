@@ -73,7 +73,10 @@ export const genStyles = StyleSheet.create({
     paddingBottom: 5,
   },
   deleteButton: {
-    padding: 15,
+    marginRight: 15,
+  },
+  editButton: {
+    marginRight: 15,
     borderLeftWidth: 1,
     borderLeftColor: COLORS.border,
   },

@@ -1,22 +1,33 @@
 import { Text, View, FlatList } from 'react-native';
 import { genStyles } from '@/assets/styles/general.styles.js';
-import { FilteredSearch } from '@/components/FilteredSearch';
-import { styles } from "@/assets/styles/logOrder.styles.js";
+// import { FilteredSearch } from '@/components/FilteredSearch';
+// import { styles } from "@/assets/styles/logOrder.styles.js";
 import { useState } from 'react';
-import { CustomersItem } from '@/components/CustomersItem';
+import { ProductsItem } from '@/components/ProductsItem';
+import { useProducts } from '@/hooks/useProducts';
+import { handleDelete } from "@/utils/helpers";
+import { useUser } from '@clerk/clerk-expo';
+import { useEffect } from 'react';
+import { FilteredSearch } from '@/components/FilteredSearch';
+
+import PageLoader from '@/components/PageLoader';
 
 export default function Products() {
+    const { user } = useUser();
+    const { products, isLoading, loadData } = useProducts(user.id); // add a delete route for this
     const[filteredProducts, setFilteredProducts] = useState([]);
 
-    const products = [
-        'This is temp',
-        'This is temp I promise',
-    ]
+    // Call customers hook
+    useEffect(() => {
+        loadData()
+    }, [loadData]);
+
+    if(isLoading) return <PageLoader />;
 
     return (
         <View style={genStyles.container}>
             <View style={genStyles.content}>
-                
+                <FilteredSearch dataToFilter={products} onFilter={setFilteredProducts}/>
             </View>
             <FlatList
                 style={genStyles.itemsList}
@@ -25,7 +36,7 @@ export default function Products() {
                 renderItem={({item}) => (
                     // Choose customer op
                     // To do: choose products for customer purchase
-                    <CustomersItem item={item} onDelete={null} delOp={null} cardAct={null}
+                    <ProductsItem item={item} onDelete={handleDelete} delOp={null} cardAct={null}
                     />
                 )}
                 ListEmptyComponent={

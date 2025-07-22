@@ -23,8 +23,6 @@ export default function Home() {
 
   const formattedDate = currentDate.toLocaleDateString(undefined, options1);
   const day = currentDate.toLocaleDateString(undefined, options2);
-  
-  
 
   const[refreshing, setRefreshing] = useState(false);
 
