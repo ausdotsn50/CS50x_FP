@@ -85,7 +85,7 @@ const orderFor = () => {
         if (!response.ok) throw new Error("Failed to create order"); // note on delete + create
       
         Alert.alert("Success", "Order created successfully");
-        router.replace("/");
+        router.replace("/")
       } catch(error) {
         console.error("Error creating order: ", error); 
         Alert.alert("An error occurred", error.message);
