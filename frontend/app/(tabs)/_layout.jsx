@@ -50,21 +50,21 @@ export default function TabLayout() {
       />
       
       <Tabs.Screen
-        name="customers"
-        options={{
-          tabBarLabel: "Customers",
-          tabBarIcon: ({ color }) => (
-            <Ionicons name="person" size={23} color={color} />
-          ),
-        }}
-      />
-
-      <Tabs.Screen
         name="products"
         options={{
           tabBarLabel: "Products",
           tabBarIcon: ({ color }) => (
             <FontAwesome6 name="bottle-water" size={23} color={color} />
+          ),
+        }}
+      />
+
+      <Tabs.Screen
+        name="customers"
+        options={{
+          tabBarLabel: "Customers",
+          tabBarIcon: ({ color }) => (
+            <Ionicons name="person" size={23} color={color} />
           ),
         }}
       />
