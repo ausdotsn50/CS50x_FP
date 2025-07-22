@@ -5,14 +5,17 @@ import { OrdersItem } from "../../components/OrdersItem";
 import { SignOutButton } from '@/components/SignOutButton';
 import { genStyles } from "@/assets/styles/general.styles.js";
 import { styles } from "@/assets/styles/home.styles.js";
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useOrders } from "@/hooks/useOrders";
 import { useUser } from '@clerk/clerk-expo';
 import { handleDelete } from "@/utils/helpers";
 
 export default function Home() {
+  // Hooks
   const { user } = useUser();
   const { orders, summary, isLoading, loadData, deleteOrder } = useOrders(user.id)
+
+  // Formatting values
   const currentDate = new Date(); // date today
 
   const options1 = { year: 'numeric', month: 'long', day: 'numeric' };
@@ -20,16 +23,21 @@ export default function Home() {
 
   const formattedDate = currentDate.toLocaleDateString(undefined, options1);
   const day = currentDate.toLocaleDateString(undefined, options2);
+  
+  
 
-  // console.log("user id:", user.id);
+  const[refreshing, setRefreshing] = useState(false);
 
-  // Test useFocusEffect
+  // enabling asynchronous, promise-based behavior
+  const onRefresh = async() => {
+    setRefreshing(true);
+    await loadData() // loading the data from scratch
+    setRefreshing(false);
+  }
+  
   useEffect(() => {
     loadData()
   }, [loadData]);
-
-  // console.log("orders: ", orders);
-  // console.log("summary: ", summary);
 
   if(isLoading) return <PageLoader />;
   
@@ -128,6 +136,9 @@ export default function Home() {
           <View style={genStyles.emptyState}>
             <Text style={genStyles.emptyStateTitle}>No orders to display yet</Text>
           </View>
+        }
+        refreshControl={
+          <RefreshControl refreshing={refreshing} onRefresh={onRefresh}/>
         }
       />
     </View>
