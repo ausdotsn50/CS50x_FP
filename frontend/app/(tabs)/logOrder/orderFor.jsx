@@ -1,9 +1,9 @@
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import PageLoader from '@/components/PageLoader';
 
+import { Alert, Text, TextInput, TouchableOpacity, View } from 'react-native'
 import { COLORS } from "@/constants/color.js"
 import { genStyles } from '@/assets/styles/general.styles.js';
-import { Text, TextInput, TouchableOpacity, View } from 'react-native'
 import { styles } from "@/assets/styles/logOrder.styles.js";
 import { useRouter } from 'expo-router';
 import { CustomDropdown } from '@/components/CustomDropdown';
@@ -13,11 +13,11 @@ import { useEffect, useState } from 'react';
 import { useLocalSearchParams } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import { API_URL } from '../../../hooks/useOrders';
-import { Alert } from 'react-native';
 
 const orderFor = () => {
   const router = useRouter();
   const { user } = useUser();
+  
   const { products, isLoading, loadData } = useProducts(user.id); 
   const { customerId, customerName } = useLocalSearchParams(); // local params passed from logOrder/index.jsx
 
@@ -147,8 +147,8 @@ const orderFor = () => {
                   setPQuantValue(onlyDigits);
               }}
           />
-          <TouchableOpacity style={styles.submitButton} onPress={submitForm}>
-              <Text style={styles.subButtonTxt}>Submit Order</Text>
+          <TouchableOpacity style={[styles.submitButton, subLoading && {backgroundColor : COLORS.card}]} onPress={submitForm} disabled={subLoading}>
+              <Text style={styles.subButtonTxt}>{subLoading ? "Submitting..." : "Submit Order"}</Text>
           </TouchableOpacity>
         </View>
 

@@ -1,8 +1,9 @@
-import { useEffect } from "react";
 import filter from "lodash.filter";
-import { TextInput } from 'react-native';
-import { useState } from "react";
+
+import { useEffect, useState } from "react";
 import { styles } from "@/assets/styles/logOrder.styles.js";
+import { TextInput } from 'react-native';
+
 
 export const FilteredSearch = ({ dataToFilter, onFilter }) => {
     const[searchQuery, setSearchQuery] = useState(""); // by default, an empty string

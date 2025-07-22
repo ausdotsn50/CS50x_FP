@@ -1,16 +1,14 @@
 import PageLoader from '@/components/PageLoader';
 
 import { CustomersItem } from '@/components/CustomersItem';
-import { FlatList, Text, TextInput, View } from 'react-native';
-import { styles } from "@/assets/styles/logOrder.styles.js";
+import { FilteredSearch } from '@/components/FilteredSearch';
+import { FlatList, Text, View } from 'react-native';
 import { genStyles } from '@/assets/styles/general.styles.js';
 import { handleDelete } from '@/utils/helpers';
 import { useCustomers } from "@/hooks/useCustomers.js";
-import { useEffect  } from 'react';
+import { useEffect, useState  } from 'react';
 import { useRouter } from 'expo-router';
-import { useState } from 'react';
 import { useUser } from '@clerk/clerk-expo';
-import { FilteredSearch } from '@/components/FilteredSearch';
 
 export default function LogOrder() {
     const { user } = useUser();
@@ -34,7 +32,6 @@ export default function LogOrder() {
     useEffect(() => {
         loadData()
     }, [loadData]);
-
 
     if(isLoading) return <PageLoader />;
 
