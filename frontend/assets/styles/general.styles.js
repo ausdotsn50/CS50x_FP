@@ -37,7 +37,7 @@ export const genStyles = StyleSheet.create({
     marginHorizontal: 20,
   },
   itemsListContent: {
-    paddingBottom: 20,
+    paddingBottom: 80,
   },
   itemLeft: {
     flex: 1,

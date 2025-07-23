@@ -1,4 +1,9 @@
 import { ItemCard } from "./ItemCard";
+import { TouchableOpacity } from "react-native";
+import Feather from '@expo/vector-icons/Feather';
+import { genStyles } from "../assets/styles/general.styles";
+import FontAwesome6 from '@expo/vector-icons/FontAwesome6';
+import { COLORS } from "@/constants/color.js"
 
 export const CustomersItem = ({ item, onDelete, delOp, cardAct}) => {
     return (
@@ -6,11 +11,20 @@ export const CustomersItem = ({ item, onDelete, delOp, cardAct}) => {
             title={item.name}
             subT={item.address}
             rightContent={null}
-            onDelete={onDelete}
             id={item.id}
-            itemType="customer"
-            delOp={delOp}
-            cardAction={cardAct} // function call
+            cardAction={cardAct}
+            iconContent={
+                <>
+                {/* edit icon to be modified */}
+                <TouchableOpacity style={genStyles.editButton} onPress={() => onDelete(item.id, "customer", delOp)}>
+                    <FontAwesome6 name="edit" size={20} color={COLORS.grnShd} />
+                </TouchableOpacity>
+                {/* delete icon */}
+                <TouchableOpacity style={genStyles.deleteButton} onPress={() => onDelete(item.id, "customer", delOp)}>
+                    <Feather name="trash-2" size={22} color={COLORS.redShd} />
+                </TouchableOpacity>
+                </>
+            }
         />
     )
 }

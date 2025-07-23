@@ -1,6 +1,6 @@
 import PageLoader from '@/components/PageLoader';
 
-import { CustomersItem } from '@/components/CustomersItem';
+import { CustomersItemRegular } from '@/components/CustomersItemRegular';
 import { FilteredSearch } from '@/components/FilteredSearch';
 import { FlatList, Text, View, RefreshControl } from 'react-native';
 import { genStyles } from '@/assets/styles/general.styles.js';
@@ -9,6 +9,7 @@ import { useCustomers } from "@/hooks/useCustomers.js";
 import { useEffect, useState  } from 'react';
 import { useRouter } from 'expo-router';
 import { useUser } from '@clerk/clerk-expo';
+
 
 export default function LogOrder() {
     const { user } = useUser();
@@ -54,7 +55,7 @@ export default function LogOrder() {
                 renderItem={({item}) => (
                     // Choose customer op
                     // To do: choose products for customer purchase
-                    <CustomersItem item={item} onDelete={handleDelete} delOp={deleteCustomer} cardAct={createOrder}
+                    <CustomersItemRegular item={item} onDelete={handleDelete} delOp={deleteCustomer} cardAct={createOrder}
                     />
                 )}
                 ListEmptyComponent={

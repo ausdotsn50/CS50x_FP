@@ -1,6 +1,9 @@
 import { genStyles } from "@/assets/styles/general.styles.js"
-import { Text } from "react-native";
+import { Text, TouchableOpacity } from "react-native";
 import { ItemCard } from "./ItemCard";
+import Feather from '@expo/vector-icons/Feather';
+
+import { COLORS } from "@/constants/color.js"
 
 export const OrdersItem = ({ item, onDelete, delOp }) => {
     const typeDisplay = item.type === "deliver" ? "Deliver" : "Walk-In";
@@ -13,19 +16,24 @@ export const OrdersItem = ({ item, onDelete, delOp }) => {
         <ItemCard
             title={item.name}
             subT={typeDisplay}
+            id={item.id}
             rightContent={
                 <>
                     <Text style={genStyles.itemAmount}>Php {((parseFloat(item.base_price) + costAdd) * item.quantity).toFixed(2)}</Text>
                     <Text style={genStyles.itemDate}>{formattedDate}</Text>
                 </>
             }
-            onDelete={onDelete} 
-            id={item.id}
-            itemType="order"
-            delOp = {delOp}
             cardAction={() => {
                 null
             }}
+            iconContent={
+                <>
+                {/* delete icon */}
+                <TouchableOpacity style={genStyles.deleteButton} onPress={() => onDelete(item.id, "order", delOp)}>
+                    <Feather name="trash-2" size={22} color={COLORS.redShd} />
+                </TouchableOpacity>
+                </>
+            }
         />
     )
 }

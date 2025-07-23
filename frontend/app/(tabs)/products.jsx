@@ -36,7 +36,7 @@ export default function Products() {
                 renderItem={({item}) => (
                     // Choose customer op
                     // To do: choose products for customer purchase
-                    <ProductsItem item={item} onDelete={handleDelete} delOp={null} cardAct={null}
+                    <ProductsItem item={item} onDelete={handleDelete} delOp={null} cardAct={() => {null}}
                     />
                 )}
                 ListEmptyComponent={

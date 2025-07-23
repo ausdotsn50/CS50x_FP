@@ -138,6 +138,7 @@ export default function Home() {
         refreshControl={
           <RefreshControl refreshing={refreshing} onRefresh={onRefresh}/>
         }
+        showsVerticalScrollIndicator={false}
       />
     </View>
   );
