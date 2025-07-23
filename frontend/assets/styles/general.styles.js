@@ -77,8 +77,6 @@ export const genStyles = StyleSheet.create({
   },
   editButton: {
     marginRight: 15,
-    borderLeftWidth: 1,
-    borderLeftColor: COLORS.border,
   },
   emptyState: {
     borderRadius: 16,
