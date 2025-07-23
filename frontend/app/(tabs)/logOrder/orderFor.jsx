@@ -108,15 +108,15 @@ const orderFor = () => {
   return (
     <View style={genStyles.container}>
       <View style={genStyles.content}>
-        <View style={styles.header}>
+        <View style={genStyles.header}>
             <TouchableOpacity>
               <MaterialIcons name="cancel" size={24} color={COLORS.text} onPress={handleReturn}/>
             </TouchableOpacity>
         </View>
 
         {/* Container for customer order interface  */}
-        <View style={styles.orderForm}>
-          <Text style={styles.orderFormTitle}>Create an order for {customerName}</Text>
+        <View style={genStyles.form}>
+          <Text style={genStyles.formTitle}>Create an order for {customerName}</Text>
           <CustomDropdown 
             data={newProdMap} 
             placeholderText="Select product to order"
@@ -147,8 +147,8 @@ const orderFor = () => {
                   setPQuantValue(onlyDigits);
               }}
           />
-          <TouchableOpacity style={[styles.submitButton, subLoading && {backgroundColor : COLORS.card}]} onPress={submitForm} disabled={subLoading}>
-              <Text style={styles.subButtonTxt}>{subLoading ? "Submitting..." : "Submit Order"}</Text>
+          <TouchableOpacity style={[genStyles.submitButton, subLoading && {backgroundColor : COLORS.card}]} onPress={submitForm} disabled={subLoading}>
+              <Text style={genStyles.subButtonTxt}>{subLoading ? "Submitting..." : "Submit Order"}</Text>
           </TouchableOpacity>
         </View>
 

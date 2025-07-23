@@ -15,10 +15,15 @@ const createProduct = () => {
     return (
         <View style={genStyles.container}>
             <View style={genStyles.content}>
-                <View style={styles.header}>
+                <View style={genStyles.header}>
                     <TouchableOpacity>
                         <MaterialIcons name="cancel" size={24} color={COLORS.text} onPress={handleReturn}/>
                     </TouchableOpacity>
+                </View>
+
+                {/* Container for create/add products interface */}
+                <View style={genStyles.form}>
+                    <Text style={genStyles.formTitle}>New Product</Text>
                 </View>
             </View>
         </View>

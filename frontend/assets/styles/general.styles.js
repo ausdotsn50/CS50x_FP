@@ -7,6 +7,14 @@ export const genStyles = StyleSheet.create({
     flex: 1,
     backgroundColor: COLORS.background,
   },
+  header: {
+    flexDirection: "row",
+    justifyContent: "flex-end", 
+    alignItems: "center",
+    marginBottom: 20,
+    paddingHorizontal: 0,
+    paddingVertical: 12,
+  },
   content: {
     padding: 20,
     paddingBottom: 0,
@@ -123,4 +131,44 @@ export const genStyles = StyleSheet.create({
   errorInput: {
     borderColor: COLORS.redShd,
   },
+  form: {
+    backgroundColor: COLORS.card,
+    paddingVertical: 40,
+    paddingHorizontal: 20,
+    marginTop: 20,
+    zIndex: 1,
+    borderRadius: 12,
+    shadowColor: COLORS.shadow,
+    shadowOffset: {
+      width: 0,
+      height: 1,
+    },
+    shadowOpacity: 0.1,
+    shadowRadius: 2,
+    elevation: 2,
+    marginBottom: 30,
+  },
+  formTitle: {
+    fontSize: 24,
+    fontWeight: "600",
+    color: COLORS.text,
+    marginBottom: 30,
+    textAlign: "center",
+  },
+  submitButton: {
+    backgroundColor: COLORS.background,
+    marginTop: 30,
+    borderRadius: 12,
+    width: '90%',
+    height: 50,
+    justifyContent: "center", 
+    alignItems: "center",     
+    alignSelf: "center",
+  },
+  subButtonTxt: {
+    color: COLORS.text,
+    fontWeight: "bold",
+    fontSize: 16,
+    textAlign: "center",
+  }
 });
