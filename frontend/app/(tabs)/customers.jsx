@@ -1,16 +1,16 @@
-import { Text, View, FlatList } from 'react-native';
-import { genStyles } from '@/assets/styles/general.styles.js';
-// import { FilteredSearch } from '@/components/FilteredSearch';
-// import { styles } from "@/assets/styles/logOrder.styles.js";
-import { useState } from 'react';
-import { CustomersItem } from '@/components/CustomersItem';
-import { useCustomers } from '@/hooks/useCustomers';
-import { handleDelete } from "@/utils/helpers";
-import { useUser } from '@clerk/clerk-expo';
-import { useEffect } from 'react';
-import { FilteredSearch } from '@/components/FilteredSearch';
 
+import AntDesign from '@expo/vector-icons/AntDesign';
 import PageLoader from '@/components/PageLoader';
+
+import { COLORS } from "@/constants/color.js"
+import { CustomersItem } from '@/components/CustomersItem';
+import { FilteredSearch } from '@/components/FilteredSearch';
+import { FlatList, Text, TouchableOpacity, View } from 'react-native';
+import { genStyles } from '@/assets/styles/general.styles.js';
+import { handleDelete } from "@/utils/helpers";
+import { useCustomers } from '@/hooks/useCustomers';
+import { useEffect, useState } from 'react';
+import { useUser } from '@clerk/clerk-expo';
 
 export default function customer() {
     const { user } = useUser();
@@ -28,6 +28,12 @@ export default function customer() {
         <View style={genStyles.container}>
             <View style={genStyles.content}>
                 <FilteredSearch dataToFilter={customers} onFilter={setfilteredCustomers}/>
+            </View>
+            {/* Add button */}
+            <View style={[genStyles.itemCard, { marginHorizontal : 20 }]}>
+                <TouchableOpacity style={[genStyles.itemContent, { alignItems: 'center', justifyContent: 'center' }]}> 
+                    <AntDesign name="adduser" size={24} color={COLORS.text} />
+                </TouchableOpacity>
             </View>
             <FlatList
                 style={genStyles.itemsList}

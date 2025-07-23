@@ -28,6 +28,19 @@ export const useProducts = (userId) => {
             setIsLoading(false); // after fetching set to false
         }
     },[fetchProducts, userId]);
+
+    const deleteProduct = useCallback(async(id) => {
+        try {
+            const response = await fetch(`${API_URL}/products/${id}`, { method : "DELETE"});
+            if (!response.ok) throw new Error("Failed to delete product");
+
+            loadData();
+            Alert.alert("Success", "Product deleted successfully");
+        } catch(error) {
+            console.error("Error deleting product: ", error); 
+            Alert.alert("An error occurred", error.message);
+        }
+    }, [loadData]);
     
-    return { products, isLoading, loadData };
+    return { products, isLoading, loadData, deleteProduct };
 }

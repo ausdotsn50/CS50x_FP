@@ -42,7 +42,7 @@ export const useCustomers = (userId) => {
             console.error("Error deleting customer: ", error); 
             Alert.alert("An error occurred", error.message);
         }
-    });
+    }, [loadData]);
     
     return { customers, isLoading, loadData, deleteCustomer };
 }

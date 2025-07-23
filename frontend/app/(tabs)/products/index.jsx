@@ -1,21 +1,27 @@
-import { Text, View, FlatList } from 'react-native';
-import { genStyles } from '@/assets/styles/general.styles.js';
-// import { FilteredSearch } from '@/components/FilteredSearch';
-// import { styles } from "@/assets/styles/logOrder.styles.js";
-import { useState } from 'react';
-import { ProductsItem } from '@/components/ProductsItem';
-import { useProducts } from '@/hooks/useProducts';
-import { handleDelete } from "@/utils/helpers";
-import { useUser } from '@clerk/clerk-expo';
-import { useEffect } from 'react';
-import { FilteredSearch } from '@/components/FilteredSearch';
-
+import Ionicons from '@expo/vector-icons/Ionicons';
 import PageLoader from '@/components/PageLoader';
+
+import { COLORS } from "@/constants/color.js"
+import { FilteredSearch } from '@/components/FilteredSearch';
+import { FlatList, Text, TouchableOpacity, View } from 'react-native';
+import { genStyles } from '@/assets/styles/general.styles.js';
+import { handleDelete } from "@/utils/helpers";
+import { ProductsItem } from '@/components/ProductsItem';
+import { useEffect, useState } from 'react';
+import { useProducts } from '@/hooks/useProducts';
+import { useRouter } from 'expo-router';
+import { useUser } from '@clerk/clerk-expo';
 
 export default function Products() {
     const { user } = useUser();
-    const { products, isLoading, loadData } = useProducts(user.id); // add a delete route for this
+    const { products, isLoading, loadData, deleteProduct } = useProducts(user.id); // add a delete route for this
+    const router = useRouter(); 
     const[filteredProducts, setFilteredProducts] = useState([]);
+
+    const createProduct = () => {
+        console.log("Creating product...");
+        router.push("products/createProduct")
+    }
 
     // Call customers hook
     useEffect(() => {
@@ -29,6 +35,12 @@ export default function Products() {
             <View style={genStyles.content}>
                 <FilteredSearch dataToFilter={products} onFilter={setFilteredProducts}/>
             </View>
+            {/* Add button */}
+            <View style={[genStyles.itemCard, { marginHorizontal : 20 }]}>
+                <TouchableOpacity onPress={() => createProduct()}style={[genStyles.itemContent, { alignItems: 'center', justifyContent: 'center' }]}> 
+                    <Ionicons name="bag-add-outline" size={24} color={COLORS.text} />
+                </TouchableOpacity>
+            </View>
             <FlatList
                 style={genStyles.itemsList}
                 contentContainerStyle={genStyles.itemsListContent}
@@ -36,7 +48,7 @@ export default function Products() {
                 renderItem={({item}) => (
                     // Choose customer op
                     // To do: choose products for customer purchase
-                    <ProductsItem item={item} onDelete={handleDelete} delOp={null} cardAct={() => {null}}
+                    <ProductsItem item={item} onDelete={handleDelete} delOp={deleteProduct} cardAct={() => {null}}
                     />
                 )}
                 ListEmptyComponent={
@@ -45,6 +57,7 @@ export default function Products() {
                     </View>
                 }
             />
+            
         </View>
     );
 }

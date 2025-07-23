@@ -10,7 +10,6 @@ import { useEffect, useState  } from 'react';
 import { useRouter } from 'expo-router';
 import { useUser } from '@clerk/clerk-expo';
 
-
 export default function LogOrder() {
     const { user } = useUser();
     const { customers, isLoading, loadData, deleteCustomer } = useCustomers(user.id);
