@@ -139,7 +139,7 @@ const orderFor = () => {
               autoCorrect={false}
               clearButtonMode='always' 
               keyboardType="number-pad"
-              style={[styles.searchBar, { marginBottom : 0, color: COLORS.borderDrk}]}
+              style={[genStyles.searchBar, { marginBottom : 0, color: COLORS.borderDrk}]}
               placeholder="Enter order quantity"
               value={pQuantValue}
               onChangeText={(numInput) =>  {

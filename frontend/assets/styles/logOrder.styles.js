@@ -4,19 +4,6 @@ import { StyleSheet } from "react-native";
 import { COLORS } from "@/constants/color.js";
 
 export const styles = StyleSheet.create({
-  searchBar: {
-    paddingHorizontal: 20,
-    paddingVertical: 8, // adjust based on list container
-    borderColor: COLORS.borderDrk,
-    borderWidth: 1,
-    borderRadius: 8,
-    marginBottom: 20,
-    paddingBottom: 5,
-    fontSize: 16,
-    color: COLORS.shadow,
-    width: "100%",
-    textAlign: "center"
-  },
   dropdown: {
     height: 50,
     width: '100%', 
@@ -67,5 +54,4 @@ export const styles = StyleSheet.create({
     color: COLORS.borderDrk,
     fontSize: 16,
   },
-  
 });

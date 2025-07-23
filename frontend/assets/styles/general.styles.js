@@ -170,5 +170,18 @@ export const genStyles = StyleSheet.create({
     fontWeight: "bold",
     fontSize: 16,
     textAlign: "center",
-  }
+  },
+  searchBar: {
+    paddingHorizontal: 20,
+    paddingVertical: 8, // adjust based on list container
+    borderColor: COLORS.borderDrk,
+    borderWidth: 1,
+    borderRadius: 8,
+    marginBottom: 20,
+    paddingBottom: 5,
+    fontSize: 16,
+    color: COLORS.shadow,
+    width: "100%",
+    textAlign: "center"
+  },
 });
