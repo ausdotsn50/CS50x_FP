@@ -1,4 +1,3 @@
-
 import AntDesign from '@expo/vector-icons/AntDesign';
 import PageLoader from '@/components/PageLoader';
 
@@ -10,12 +9,21 @@ import { genStyles } from '@/assets/styles/general.styles.js';
 import { handleDelete } from "@/utils/helpers";
 import { useCustomers } from '@/hooks/useCustomers';
 import { useEffect, useState } from 'react';
+import { useRouter } from 'expo-router';
 import { useUser } from '@clerk/clerk-expo';
 
 export default function customer() {
     const { user } = useUser();
     const { customers, isLoading, loadData, deleteCustomer } = useCustomers(user.id);
+    
     const[filteredCustomers, setfilteredCustomers] = useState([]);
+
+    const router = useRouter();
+
+    const createCustomer = () => {
+        console.log("Creating customer...");
+        router.push("customers/createCustomer");
+    }
 
     // Call customers hook
     useEffect(() => {
@@ -31,7 +39,7 @@ export default function customer() {
             </View>
             {/* Add button */}
             <View style={[genStyles.itemCard, { marginHorizontal : 20 }]}>
-                <TouchableOpacity style={[genStyles.itemContent, { alignItems: 'center', justifyContent: 'center' }]}> 
+                <TouchableOpacity onPress={() => createCustomer()} style={[genStyles.itemContent, { alignItems: 'center', justifyContent: 'center' }]}> 
                     <AntDesign name="adduser" size={24} color={COLORS.text} />
                 </TouchableOpacity>
             </View>

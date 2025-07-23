@@ -6,7 +6,7 @@ import { View, Text, TextInput, TouchableOpacity } from 'react-native';
 import { useState } from 'react';
 import { useRouter } from 'expo-router';
 
-const createProduct = () => {
+const createCustomer = () => {
     const[subLoading, setSubLoading] = useState(false); // submission of form loading
     const router = useRouter();
     const handleReturn = () => {
@@ -26,14 +26,14 @@ const createProduct = () => {
 
                 {/* Container for create/add products interface */}
                 <View style={genStyles.form}>
-                    <Text style={genStyles.formTitle}>New Product</Text>
+                    <Text style={genStyles.formTitle}>New Customer</Text>
                     <TextInput
                         autoCapitalize="none"
                         autocomplete={false}
                         autoCorrect={false}
                         clearButtonMode="always"
                         style={[genStyles.searchBar, { marginBottom : 20, color: COLORS.borderDrk}]}
-                        placeholder="Enter product item"
+                        placeholder="Enter customer name"
                     />
                     <TextInput
                         autoCapitalize="none"
@@ -41,7 +41,7 @@ const createProduct = () => {
                         autoCorrect={false}
                         clearButtonMode="always"
                         style={[genStyles.searchBar, { marginBottom : 0, color: COLORS.borderDrk}]}
-                        placeholder="Enter product base price"
+                        placeholder="Enter customer address"
                     />
                     <TouchableOpacity style={[genStyles.submitButton, subLoading && {backgroundColor : COLORS.card}]} onPress={null} disabled={subLoading}>
                         <Text style={genStyles.subButtonTxt}>{subLoading ? "Submitting..." : "Submit Order"}</Text>
@@ -53,4 +53,4 @@ const createProduct = () => {
 }
 
 // on submit order: use order route to create a new order for
-export default createProduct;
+export default createCustomer;

@@ -20,7 +20,7 @@ export default function Products() {
 
     const createProduct = () => {
         console.log("Creating product...");
-        router.push("products/createProduct")
+        router.push("products/createProduct");
     }
 
     // Call customers hook
