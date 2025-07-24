@@ -2,18 +2,59 @@ import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 
 import { COLORS } from "@/constants/color.js"
 import { genStyles } from '@/assets/styles/general.styles.js';
-import { View, Text, TextInput, TouchableOpacity } from 'react-native';
-import { useState } from 'react';
+import { Alert, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { useRouter } from 'expo-router';
+import { useState } from 'react';
+import { Ionicons } from '@expo/vector-icons';
+import { API_URL } from '../../../hooks/useOrders';
+import { useUser } from '@clerk/clerk-expo';
 
 const createProduct = () => {
-    const[subLoading, setSubLoading] = useState(false); // submission of form loading
     const router = useRouter();
+    const { user } = useUser();
+
+    // Values to be submitted
+    const[itemValue, setItemValue] = useState(null);
+    const[priceValue, setPriceValue] = useState(null);
+
+    const[formSubError, setFormSubError] = useState(""); // error msg display for form submission
+    const[subLoading, setSubLoading] = useState(false); // submission of form loading
+
     const handleReturn = () => {
         router.back();
     }
+    
+    const submitForm = async() => {
+        const price = Number(priceValue); // for isNaN checker
 
-    // submit form logic here
+        if(!itemValue || !priceValue) {
+            setFormSubError("All fields are required");
+        } else if(isNaN(price) || price <= 0) {
+            setFormSubError("Positive numeric values only");
+        } else {
+            setSubLoading(true);
+            try {
+                const response = await fetch(`${API_URL}/products`, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({
+                        userId: user.id,
+                        item: itemValue,
+                        base_price: priceValue,
+                    }),
+                });
+                    if(!response.ok) throw new Error("Failed to create product");
+                    Alert.alert("Success", "Product created succesfully")
+            } catch(error) {
+                console.error("Error creating product: ", error);
+                Alert.alert("An error occurred", error.message);
+            } finally {
+                setSubLoading(false);
+            }
+        }
+    }
 
     return (
         <View style={genStyles.container}>
@@ -34,6 +75,10 @@ const createProduct = () => {
                         clearButtonMode="always"
                         style={[genStyles.searchBar, { marginBottom : 20, color: COLORS.borderDrk}]}
                         placeholder="Enter product item"
+                        value={itemValue}
+                        onChangeText={(item) => {
+                            setItemValue(item);
+                        }}
                     />
                     <TextInput
                         autoCapitalize="none"
@@ -42,11 +87,26 @@ const createProduct = () => {
                         clearButtonMode="always"
                         style={[genStyles.searchBar, { marginBottom : 0, color: COLORS.borderDrk}]}
                         placeholder="Enter product base price"
+                        value={priceValue}
+                        onChangeText={(price) => {
+                            const isDecimal = price.replace(/[^0-9.]/g, '').replace(/(\..*?)\./g, '$1'); // allows decimal format input
+                            setPriceValue(isDecimal);
+                        }}
                     />
-                    <TouchableOpacity style={[genStyles.submitButton, subLoading && {backgroundColor : COLORS.card}]} onPress={null} disabled={subLoading}>
+                    <TouchableOpacity style={[genStyles.submitButton, subLoading && {backgroundColor : COLORS.card}]} onPress={submitForm} disabled={subLoading}>
                         <Text style={genStyles.subButtonTxt}>{subLoading ? "Submitting..." : "Submit Order"}</Text>
                     </TouchableOpacity>
                 </View>
+
+                {formSubError ? (
+                <View style={genStyles.errorBox}>
+                    <Ionicons name="alert-circle" size={20} color={COLORS.redShd}/>
+                    <Text style={[genStyles.errorText, {textAlign : "center"}]}>{formSubError}</Text>
+                    <TouchableOpacity onPress={() => setFormSubError("")}>
+                    <Ionicons name="close" size={20} color={COLORS.textLight}/>
+                    </TouchableOpacity>
+                </View>
+                ) : null}
             </View>
         </View>
     );

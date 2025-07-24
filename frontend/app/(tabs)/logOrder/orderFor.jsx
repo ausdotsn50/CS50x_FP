@@ -4,7 +4,6 @@ import PageLoader from '@/components/PageLoader';
 import { Alert, Text, TextInput, TouchableOpacity, View } from 'react-native'
 import { COLORS } from "@/constants/color.js"
 import { genStyles } from '@/assets/styles/general.styles.js';
-import { styles } from "@/assets/styles/logOrder.styles.js";
 import { useRouter } from 'expo-router';
 import { CustomDropdown } from '@/components/CustomDropdown';
 import { useProducts } from '@/hooks/useProducts';
@@ -82,10 +81,9 @@ const orderFor = () => {
               type: pTypeValue,
           }),
       });
-        if (!response.ok) throw new Error("Failed to create order"); // note on delete + create
-      
-        Alert.alert("Success", "Order created successfully");
-        router.replace("/")
+          if (!response.ok) throw new Error("Failed to create order"); // note on delete + create
+          Alert.alert("Success", "Order created successfully");
+          router.replace("/")
       } catch(error) {
         console.error("Error creating order: ", error); 
         Alert.alert("An error occurred", error.message);
@@ -143,6 +141,7 @@ const orderFor = () => {
               placeholder="Enter order quantity"
               value={pQuantValue}
               onChangeText={(numInput) =>  {
+                  // allow 0-9 value for typing
                   const onlyDigits = numInput.replace(/[^0-9]/g, ''); // arguments for replace method string.replace(searchValue, replacement)
                   setPQuantValue(onlyDigits);
               }}

@@ -24,7 +24,7 @@ const createCustomer = () => {
                     </TouchableOpacity>
                 </View>
 
-                {/* Container for create/add products interface */}
+                {/* Container for create/add customers interface */}
                 <View style={genStyles.form}>
                     <Text style={genStyles.formTitle}>New Customer</Text>
                     <TextInput

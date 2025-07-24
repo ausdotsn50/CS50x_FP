@@ -13,12 +13,12 @@ import { useRouter } from 'expo-router';
 import { useUser } from '@clerk/clerk-expo';
 
 export default function customer() {
+    const router = useRouter();
+
     const { user } = useUser();
     const { customers, isLoading, loadData, deleteCustomer } = useCustomers(user.id);
     
     const[filteredCustomers, setfilteredCustomers] = useState([]);
-
-    const router = useRouter();
 
     const createCustomer = () => {
         console.log("Creating customer...");
