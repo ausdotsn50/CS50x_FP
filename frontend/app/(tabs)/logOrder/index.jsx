@@ -11,9 +11,10 @@ import { useRouter } from 'expo-router';
 import { useUser } from '@clerk/clerk-expo';
 
 export default function LogOrder() {
+    const router = useRouter(); 
+
     const { user } = useUser();
     const { customers, isLoading, loadData, deleteCustomer } = useCustomers(user.id);
-    const router = useRouter(); 
 
     const[filteredCustomers, setFilteredCustomers] = useState([]); // stored filtered query of customers here
     const[refreshing, setRefreshing] = useState(false);

@@ -1,13 +1,13 @@
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 
+import { Alert, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { API_URL } from '@/hooks/useOrders';
 import { COLORS } from "@/constants/color.js"
 import { genStyles } from '@/assets/styles/general.styles.js';
-import { Alert, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { useRouter } from 'expo-router';
 import { useState } from 'react';
-import { Ionicons } from '@expo/vector-icons';
-import { API_URL } from '../../../hooks/useOrders';
 import { useUser } from '@clerk/clerk-expo';
+import { ErrorBox } from '@/components/ErrorBox';
 
 const createProduct = () => {
     const router = useRouter();
@@ -19,7 +19,8 @@ const createProduct = () => {
 
     const[formSubError, setFormSubError] = useState(""); // error msg display for form submission
     const[subLoading, setSubLoading] = useState(false); // submission of form loading
-
+    
+    // Functions to be used
     const handleReturn = () => {
         router.back();
     }
@@ -46,7 +47,7 @@ const createProduct = () => {
                     }),
                 });
                     if(!response.ok) throw new Error("Failed to create product");
-                    Alert.alert("Success", "Product created succesfully")
+                    Alert.alert("Success", "Product created succesfully");
             } catch(error) {
                 console.error("Error creating product: ", error);
                 Alert.alert("An error occurred", error.message);
@@ -94,19 +95,11 @@ const createProduct = () => {
                         }}
                     />
                     <TouchableOpacity style={[genStyles.submitButton, subLoading && {backgroundColor : COLORS.card}]} onPress={submitForm} disabled={subLoading}>
-                        <Text style={genStyles.subButtonTxt}>{subLoading ? "Submitting..." : "Submit Order"}</Text>
+                        <Text style={genStyles.subButtonTxt}>{subLoading ? "Creating..." : "Create Product"}</Text>
                     </TouchableOpacity>
                 </View>
 
-                {formSubError ? (
-                <View style={genStyles.errorBox}>
-                    <Ionicons name="alert-circle" size={20} color={COLORS.redShd}/>
-                    <Text style={[genStyles.errorText, {textAlign : "center"}]}>{formSubError}</Text>
-                    <TouchableOpacity onPress={() => setFormSubError("")}>
-                    <Ionicons name="close" size={20} color={COLORS.textLight}/>
-                    </TouchableOpacity>
-                </View>
-                ) : null}
+                <ErrorBox error={formSubError} setError={setFormSubError}/>
             </View>
         </View>
     );

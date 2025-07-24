@@ -1,5 +1,6 @@
 import { Alert } from "react-native";
 
+// Delete alert message
 export const handleDelete = (id, itemType, deleteOrder) => {
     const capitalized = itemType.charAt(0).toUpperCase() + itemType.slice(1)
 
@@ -8,4 +9,3 @@ export const handleDelete = (id, itemType, deleteOrder) => {
         { text: "Delete", style: "destructive", onPress: () => deleteOrder(id)},
     ]);
 };
-

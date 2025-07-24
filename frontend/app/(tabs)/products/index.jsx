@@ -19,7 +19,7 @@ export default function Products() {
     const[filteredProducts, setFilteredProducts] = useState([]);
 
     const createProduct = () => {
-        console.log("Creating product...");
+        // console.log("Creating product...");
         router.push("products/createProduct");
     }
 

@@ -1,6 +1,5 @@
-import { COLORS } from "@/constants/color.js";
+import { ErrorBox } from "@/components/ErrorBox";
 import { Image } from "expo-image";
-import { Ionicons } from "@expo/vector-icons";
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { Link, useRouter } from 'expo-router';
 import { styles } from "@/assets/styles/auth.styles.js";
@@ -60,15 +59,7 @@ export default function Page() {
         <Image source={require("../../assets/images/waterDispenserJug.png")} style={styles.illustration}></Image>
         <Text style={styles.title}>Welcome Back</Text>
 
-        {error ? (
-          <View style={genStyles.errorBox}>
-            <Ionicons name="alert-circle" size={20} color={COLORS.redShd}/>
-            <Text style={genStyles.errorText}>{error}</Text>
-            <TouchableOpacity onPress={() => setError("")}>
-              <Ionicons name="close" size={20} color={COLORS.textLight}/>
-            </TouchableOpacity>
-          </View>
-        ) : null}
+        <ErrorBox error={error} setError={setError} />
 
         <TextInput
           style={[styles.input, error && genStyles.errorInput]}

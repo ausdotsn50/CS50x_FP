@@ -1,17 +1,17 @@
-import { COLORS } from "@/constants/color.js";
+import { ErrorBox } from "@/components/ErrorBox";
 import { Image } from "expo-image";
-import { Ionicons } from "@expo/vector-icons";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view"
 import { styles } from "@/assets/styles/auth.styles.js";
 import { Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { useRouter } from 'expo-router';
 import { useSignUp } from '@clerk/clerk-expo';
 import { useState } from 'react';
+import { genStyles } from "../../assets/styles/general.styles";
 
 export default function SignUpScreen() {
-  const { isLoaded, signUp, setActive } = useSignUp()
   const router = useRouter()
-
+  const { isLoaded, signUp, setActive } = useSignUp()
+  
   const [emailAddress, setEmailAddress] = useState('')
   const [password, setPassword] = useState('')
   const [pendingVerification, setPendingVerification] = useState(false)
@@ -78,19 +78,11 @@ export default function SignUpScreen() {
         <Text style={styles.verificationTitle}>Verify your email</Text>
         
         {/* If there's an error, display the UI below */}
-        {error ? (
-          <View style={styles.errorBox}>
-            <Ionicons name="alert-circle" size={20} color={COLORS.redShd}/>
-            <Text style={styles.errorText}>{error}</Text>
-            <TouchableOpacity onPress={() => setError("")}>
-              <Ionicons name="close" size={20} color={COLORS.textLight}/>
-            </TouchableOpacity>
-          </View>
-        ) : null}
+        <ErrorBox error={error} setError={setError}/>
         
         {/* Conditional styles using array */}
         <TextInput
-          style={[styles.verificationInput, error && styles.errorInput]}
+          style={[styles.verificationInput, error && genStyles.errorInput]}
           value={code}
           placeholder="Enter your verification code"
           placeholderTextColor="#9A8478"
@@ -120,18 +112,10 @@ export default function SignUpScreen() {
         <Text style={styles.title}>Create Account</Text>
 
         {/* Add error checker here */}
-        {error ? (
-          <View style={styles.errorBox}>
-            <Ionicons name="alert-circle" size={20} color={COLORS.redShd}/>
-            <Text style={styles.errorText}>{error}</Text>
-            <TouchableOpacity onPress={() => setError("")}>
-              <Ionicons name="close" size={20} color={COLORS.textLight}/>
-            </TouchableOpacity>
-          </View>
-        ) : null}
+        <ErrorBox error={error} setError={setError} />
 
         <TextInput
-          style={[styles.input, error && styles.errorInput]}
+          style={[styles.input, error && genStyles.errorInput]}
           autoCapitalize="none"
           value={emailAddress}
           placeholder="Enter email"
@@ -140,7 +124,7 @@ export default function SignUpScreen() {
         />
 
         <TextInput
-          style={[styles.input, error && styles.errorInput]}
+          style={[styles.input, error && genStyles.errorInput]}
           value={password}
           placeholder="Enter password"
           placeholderTextColor="#9A8478"

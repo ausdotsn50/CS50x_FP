@@ -2,16 +2,16 @@ import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import PageLoader from '@/components/PageLoader';
 
 import { Alert, Text, TextInput, TouchableOpacity, View } from 'react-native'
-import { COLORS } from "@/constants/color.js"
+import { API_URL } from '@/hooks/useOrders';
+import { COLORS } from "@/constants/color.js";
+import { ErrorBox } from '@/components/ErrorBox';
 import { genStyles } from '@/assets/styles/general.styles.js';
+import { useLocalSearchParams } from 'expo-router';
 import { useRouter } from 'expo-router';
 import { CustomDropdown } from '@/components/CustomDropdown';
 import { useProducts } from '@/hooks/useProducts';
 import { useUser } from '@clerk/clerk-expo';
 import { useEffect, useState } from 'react';
-import { useLocalSearchParams } from 'expo-router';
-import { Ionicons } from '@expo/vector-icons';
-import { API_URL } from '../../../hooks/useOrders';
 
 const orderFor = () => {
   const router = useRouter();
@@ -151,15 +151,7 @@ const orderFor = () => {
           </TouchableOpacity>
         </View>
 
-        {formSubError ? (
-          <View style={genStyles.errorBox}>
-            <Ionicons name="alert-circle" size={20} color={COLORS.redShd}/>
-            <Text style={[genStyles.errorText, {textAlign : "center"}]}>{formSubError}</Text>
-            <TouchableOpacity onPress={() => setFormSubError("")}>
-              <Ionicons name="close" size={20} color={COLORS.textLight}/>
-            </TouchableOpacity>
-          </View>
-        ) : null}
+        <ErrorBox error={formSubError} setError={setFormSubError}/>
 
       </View>
     </View>
