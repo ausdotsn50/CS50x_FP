@@ -1,13 +1,9 @@
-import MaterialIcons from '@expo/vector-icons/MaterialIcons';
-
-import { Alert, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { Alert } from "react-native";
 import { API_URL } from '@/hooks/useOrders';
-import { COLORS } from "@/constants/color.js"
-import { genStyles } from '@/assets/styles/general.styles.js';
+import { ProductForm } from '@/components/ProductForm';
 import { useRouter } from 'expo-router';
 import { useState } from 'react';
 import { useUser } from '@clerk/clerk-expo';
-import { ErrorBox } from '@/components/ErrorBox';
 
 const createProduct = () => {
     const router = useRouter();
@@ -59,50 +55,22 @@ const createProduct = () => {
     }
 
     return (
-        <View style={genStyles.container}>
-            <View style={genStyles.content}>
-                <View style={genStyles.header}>
-                    <TouchableOpacity>
-                        <MaterialIcons name="cancel" size={24} color={COLORS.text} onPress={handleReturn}/>
-                    </TouchableOpacity>
-                </View>
-
-                {/* Container for create/add products interface */}
-                <View style={genStyles.form}>
-                    <Text style={genStyles.formTitle}>New Product</Text>
-                    <TextInput
-                        autoCapitalize="none"
-                        autocomplete={false}
-                        autoCorrect={false}
-                        clearButtonMode="always"
-                        style={[genStyles.searchBar, { marginBottom : 20, color: COLORS.borderDrk }]}
-                        placeholder="Enter product item"
-                        value={itemValue}
-                        onChangeText={(item) => {
-                            setItemValue(item);
-                        }}
-                    />
-                    <TextInput
-                        autoCapitalize="none"
-                        autocomplete={false}
-                        autoCorrect={false}
-                        clearButtonMode="always"
-                        style={[genStyles.searchBar, { marginBottom : 0, color: COLORS.borderDrk}]}
-                        placeholder="Enter product base price"
-                        value={priceValue}
-                        onChangeText={(price) => {
-                            const isDecimal = price.replace(/[^0-9.]/g, '').replace(/(\..*?)\./g, '$1'); // allows decimal format input
-                            setPriceValue(isDecimal);
-                        }}
-                    />
-                    <TouchableOpacity style={[genStyles.submitButton, subLoading && {backgroundColor : COLORS.card}]} onPress={submitForm} disabled={subLoading}>
-                        <Text style={genStyles.subButtonTxt}>{subLoading ? "Creating..." : "Create Product"}</Text>
-                    </TouchableOpacity>
-                </View>
-
-                <ErrorBox error={formSubError} setError={setFormSubError}/>
-            </View>
-        </View>
+        <ProductForm 
+            formTitle="New Product" 
+            subLoading={subLoading} 
+            submitForm={submitForm} 
+            toAct="Create Product"
+            currentAct="Creating..." 
+            formError={formSubError}
+            setFormError={setFormSubError}
+            handleReturn={handleReturn}
+            itemVal={itemValue}
+            setItemVal={setItemValue}
+            priceVal={priceValue}
+            setPriceVal={setPriceValue}
+            itemHolder="Enter product item"
+            priceHolder="Enter product base price"
+        />
     );
 }
 

@@ -16,15 +16,25 @@ export default function Products() {
     const router = useRouter(); 
     
     const { user } = useUser();
-    const { products, isLoading, loadData, deleteProduct } = useProducts(user.id); // add a delete route for this
+    const { products, isLoading, loadData, deleteProduct } = useProducts(user.id); // custom products hook
     
-    const[filteredProducts, setFilteredProducts] = useState([]);
-    const[refreshing, setRefreshing] = useState(false);
+    const[filteredProducts, setFilteredProducts] = useState([]); // used for search functionality
+    const[refreshing, setRefreshing] = useState(false); // used for Flatlist on refresh
 
     const createProduct = () => {
         // console.log("Creating product...");
         router.push("products/createProduct");
     }
+
+    const editProduct = (item, price) => {
+        router.push({
+            pathname: "/products/editProduct",
+            params: {
+                productItem: item,
+                productPrice: price,
+            }
+        });
+    };
 
     const onRefresh = async() => {
         setRefreshing(true);
@@ -55,9 +65,8 @@ export default function Products() {
                 contentContainerStyle={genStyles.itemsListContent}
                 data={filteredProducts}
                 renderItem={({item}) => (
-                    // Choose customer op
-                    // To do: choose products for customer purchase
-                    <ProductsItem item={item} onDelete={handleDelete} delOp={deleteProduct} cardAct={() => {null}}
+                    // Custom products item component thats lists item and its base price
+                    <ProductsItem item={item} onDelete={handleDelete} delOp={deleteProduct} cardAct={() => {null}} onEdit={editProduct}
                     />
                 )}
                 ListEmptyComponent={

@@ -5,7 +5,7 @@ import { genStyles } from "../assets/styles/general.styles";
 import FontAwesome6 from '@expo/vector-icons/FontAwesome6';
 import { COLORS } from "@/constants/color.js"
 
-export const CustomersItem = ({ item, onDelete, delOp, cardAct}) => {
+export const CustomersItem = ({ item, onDelete, delOp, cardAct }) => {
     return (
         <ItemCard
             title={item.name}
