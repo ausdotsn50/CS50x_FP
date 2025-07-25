@@ -3,7 +3,7 @@ import PageLoader from '@/components/PageLoader';
 
 import { COLORS } from "@/constants/color.js"
 import { FilteredSearch } from '@/components/FilteredSearch';
-import { FlatList, Text, TouchableOpacity, View } from 'react-native';
+import { FlatList, RefreshControl, Text, TouchableOpacity, View } from 'react-native';
 import { genStyles } from '@/assets/styles/general.styles.js';
 import { handleDelete } from "@/utils/helpers";
 import { ProductsItem } from '@/components/ProductsItem';
@@ -13,15 +13,24 @@ import { useRouter } from 'expo-router';
 import { useUser } from '@clerk/clerk-expo';
 
 export default function Products() {
+    const router = useRouter(); 
+    
     const { user } = useUser();
     const { products, isLoading, loadData, deleteProduct } = useProducts(user.id); // add a delete route for this
-    const router = useRouter(); 
+    
     const[filteredProducts, setFilteredProducts] = useState([]);
+    const[refreshing, setRefreshing] = useState(false);
 
     const createProduct = () => {
         // console.log("Creating product...");
         router.push("products/createProduct");
     }
+
+    const onRefresh = async() => {
+        setRefreshing(true);
+        await loadData() // loading the data from scratch
+        setRefreshing(false);
+    } 
 
     // Call customers hook
     useEffect(() => {
@@ -55,6 +64,9 @@ export default function Products() {
                     <View style={genStyles.emptyState}>
                     <Text style={genStyles.emptyStateTitle}>No products to display yet</Text>
                     </View>
+                }
+                refreshControl={
+                    <RefreshControl refreshing={refreshing} onRefresh={onRefresh}/>
                 }
             />
             

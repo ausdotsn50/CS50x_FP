@@ -30,7 +30,6 @@ export const styles = StyleSheet.create({
     borderColor: COLORS.border,
     fontSize: 16,
     color: COLORS.text,
-    
   },
   button: {
     backgroundColor: COLORS.primary,

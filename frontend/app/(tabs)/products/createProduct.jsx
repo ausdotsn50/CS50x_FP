@@ -53,6 +53,7 @@ const createProduct = () => {
                 Alert.alert("An error occurred", error.message);
             } finally {
                 setSubLoading(false);
+                handleReturn();
             }
         }
     }
@@ -74,7 +75,7 @@ const createProduct = () => {
                         autocomplete={false}
                         autoCorrect={false}
                         clearButtonMode="always"
-                        style={[genStyles.searchBar, { marginBottom : 20, color: COLORS.borderDrk}]}
+                        style={[genStyles.searchBar, { marginBottom : 20, color: COLORS.borderDrk }]}
                         placeholder="Enter product item"
                         value={itemValue}
                         onChangeText={(item) => {

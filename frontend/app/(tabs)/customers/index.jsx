@@ -4,7 +4,7 @@ import PageLoader from '@/components/PageLoader';
 import { COLORS } from "@/constants/color.js"
 import { CustomersItem } from '@/components/CustomersItem';
 import { FilteredSearch } from '@/components/FilteredSearch';
-import { FlatList, Text, TouchableOpacity, View } from 'react-native';
+import { FlatList, RefreshControl, Text, TouchableOpacity, View } from 'react-native';
 import { genStyles } from '@/assets/styles/general.styles.js';
 import { handleDelete } from "@/utils/helpers";
 import { useCustomers } from '@/hooks/useCustomers';
@@ -19,10 +19,17 @@ export default function customer() {
     const { customers, isLoading, loadData, deleteCustomer } = useCustomers(user.id);
     
     const[filteredCustomers, setfilteredCustomers] = useState([]);
-
+    const[refreshing, setRefreshing] = useState(false);
+    
     const createCustomer = () => {
-        console.log("Creating customer...");
+        // console.log("Creating customer...");
         router.push("customers/createCustomer");
+    }
+
+    const onRefresh = async() => {
+        setRefreshing(true);
+        await loadData() // loading the data from scratch
+        setRefreshing(false);
     }
 
     // Call customers hook
@@ -57,6 +64,9 @@ export default function customer() {
                     <View style={genStyles.emptyState}>
                     <Text style={genStyles.emptyStateTitle}>No customers to display yet</Text>
                     </View>
+                }
+                refreshControl={
+                    <RefreshControl refreshing={refreshing} onRefresh={onRefresh}/>
                 }
             />
         </View>

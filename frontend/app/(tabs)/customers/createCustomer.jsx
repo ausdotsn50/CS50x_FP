@@ -1,17 +1,17 @@
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 
+import { Alert, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { API_URL } from '@/hooks/useOrders';
 import { COLORS } from "@/constants/color.js";
 import { ErrorBox } from '@/components/ErrorBox';
 import { genStyles } from '@/assets/styles/general.styles.js';
-import { Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { useRouter } from 'expo-router';
 import { useState } from 'react';
 import { useUser } from '@clerk/clerk-expo';
 
 const createCustomer = () => {
-    const { user } = useUser();
     const router = useRouter();
+    const { user } = useUser();
     
     const[nameValue, setNameValue] = useState(null);
     const[addressValue, setAddressValue] = useState(null);
@@ -47,6 +47,7 @@ const createCustomer = () => {
                 Alert.alert("An error occurred", error.message);
             } finally {
                 setSubLoading(false);
+                handleReturn();
             }
         }
     }
