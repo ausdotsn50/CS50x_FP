@@ -19,7 +19,28 @@ const editProduct = () => {
   }
 
   const submitForm = () => {
-    console.log("Form submitted");
+    const price = Number(newPriceValue); // for isNaN checker
+
+    if(!newItemValue && !newPriceValue) {
+        setFormSubError("Fill at least one field");
+    } else {
+      if(!newItemValue) {
+        if(isNaN(price) || price <= 0) setFormSubError("Positive numeric values only");
+      }
+      
+      setSubLoading(true);
+      try {
+        // hook here
+        console.log("hello")
+      } catch(error) {
+        console.error("Error updating product: ", error);
+        Alert.alert("An error occurred", error.message);
+      } finally {
+        // setSubLoading(false);
+        // handleReturn();
+        console.log("Updating success");
+      }
+    }
   }
 
   return (
@@ -27,8 +48,8 @@ const editProduct = () => {
       formTitle="Modify Product"
       subLoading={subLoading}
       submitForm={submitForm}
-      toAct="Edit Product"
-      currentAct="Editing..."
+      toAct="Update Product"
+      currentAct="Updating..."
       formError={formSubError}
       setFormError={setFormSubError}
       handleReturn={handleReturn}
