@@ -24,33 +24,45 @@ const createProduct = () => {
     const submitForm = async() => {
         const price = Number(priceValue); // for isNaN checker
 
+        /* Falsy values return
+            - false
+            - 0 (number)
+            - empty string
+            - null
+            - undefined 
+            - NaN
+        */
+        
         if(!itemValue || !priceValue) {
             setFormSubError("All fields are required");
+            return;
         } else if(isNaN(price) || price <= 0) {
             setFormSubError("Positive numeric values only");
-        } else {
-            setSubLoading(true);
-            try {
-                const response = await fetch(`${API_URL}/products`, {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                    body: JSON.stringify({
-                        userId: user.id,
-                        item: itemValue,
-                        base_price: priceValue,
-                    }),
-                });
-                    if(!response.ok) throw new Error("Failed to create product");
-                    Alert.alert("Success", "Product created succesfully");
-            } catch(error) {
-                console.error("Error creating product: ", error);
-                Alert.alert("An error occurred", error.message);
-            } finally {
-                setSubLoading(false);
-                handleReturn();
-            }
+            return;
+        }
+
+        setSubLoading(true);
+        try {
+            const response = await fetch(`${API_URL}/products`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    userId: user.id,
+                    item: itemValue.trim(),
+                    base_price: price,
+                }),
+            });
+                if(!response.ok) throw new Error("Failed to create product");
+                Alert.alert("Success", "Product created succesfully");
+
+        } catch(error) {
+            console.error("Error creating product: ", error);
+            Alert.alert("An error occurred", error.message);
+        } finally {
+            setSubLoading(false);
+            handleReturn();
         }
     }
 

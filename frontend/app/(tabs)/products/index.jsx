@@ -26,10 +26,11 @@ export default function Products() {
         router.push("products/createProduct");
     }
 
-    const editProduct = (item, price) => {
+    const editProduct = (id, item, price) => {
         router.push({
             pathname: "/products/editProduct",
             params: {
+                productId: id,
                 productItem: item,
                 productPrice: price,
             }

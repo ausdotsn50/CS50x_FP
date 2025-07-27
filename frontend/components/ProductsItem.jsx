@@ -16,7 +16,7 @@ export const ProductsItem = ({ item, onDelete, delOp, cardAct, onEdit}) => {
             iconContent={
                 <>
                 {/* edit icon to be modified */}
-                <TouchableOpacity style={genStyles.editButton} onPress={() => onEdit(item.item, item.base_price)}>
+                <TouchableOpacity style={genStyles.editButton} onPress={() => onEdit(item.id, item.item, item.base_price)}>
                     <FontAwesome6 name="edit" size={20} color={COLORS.grnShd} />
                 </TouchableOpacity>
                 {/* delete icon */}

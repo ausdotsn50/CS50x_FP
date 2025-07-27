@@ -15,34 +15,39 @@ const editProduct = () => {
   const[newPriceValue, setNewPriceValue] = useState(productPrice);
   
   const handleReturn = () => {
-    router.back();
+    if(router.canGoBack()) router.back()
   }
 
   // trim spaces for submit
   const submitForm = () => {
     const price = Number(newPriceValue); // for isNaN checker
 
+    // If both input fields are blank
     if(!newItemValue && !newPriceValue) {
-        setFormSubError("Fill at least one field");
-    } else {
-      // if item value is falsy
-      if(!newItemValue) {
-        if(isNaN(price) || price <= 0) setFormSubError("Positive numeric values only");
-      }
-
-      setSubLoading(true);
-      try {
-        // hook here
-        console.log("hello")
-      } catch(error) {
-        console.error("Error updating product: ", error);
-        Alert.alert("An error occurred", error.message);
-      } finally {
-        // setSubLoading(false);
-        // handleReturn();
-        console.log("Updating success");
-      }
+        setFormSubError("Fill up at least one field");
+        return;
     }
+
+    if(!newItemValue) {
+      if(isNaN(price) || price <= 0) {
+        setFormSubError("Positive numeric values only");
+        return;
+      }
+    }    
+    
+    setSubLoading(true);
+    try {
+      // hook here
+      console.log("hello")
+    } catch(error) {
+      console.error("Error updating product: ", error);
+      Alert.alert("An error occurred", error.message);
+    } finally {
+      // setSubLoading(false);
+      // handleReturn();
+      console.log("Updating success");
+    }
+    
   }
 
   return (
