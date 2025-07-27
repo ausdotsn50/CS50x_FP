@@ -42,6 +42,6 @@ export const useProducts = (userId) => {
             Alert.alert("An error occurred", error.message);
         }
     }, [loadData]);
-    
+
     return { products, isLoading, loadData, deleteProduct };
 }
