@@ -18,9 +18,9 @@ const createProduct = () => {
     
     // Functions to be used
     const handleReturn = () => {
-        router.back();
+        if(router.canGoBack()) router.back()
     }
-    
+
     const submitForm = async() => {
         const price = Number(priceValue); // for isNaN checker
 

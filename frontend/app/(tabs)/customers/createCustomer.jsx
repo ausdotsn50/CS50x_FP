@@ -16,7 +16,7 @@ const createCustomer = () => {
     const[subLoading, setSubLoading] = useState(false); // submission of form loading
 
     const handleReturn = () => {
-        router.back();
+        if(router.canGoBack()) router.back()
     }
 
     const submitForm = async() => {

@@ -47,7 +47,7 @@ const orderFor = () => {
   const typeValues = types.map(type => type.value);
 
   const handleReturn = () => {
-    router.back()
+    if(router.canGoBack()) router.back()
   }
   
   // Form submission logic and validation
