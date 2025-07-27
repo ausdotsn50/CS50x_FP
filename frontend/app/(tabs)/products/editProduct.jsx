@@ -18,16 +18,18 @@ const editProduct = () => {
     router.back();
   }
 
+  // trim spaces for submit
   const submitForm = () => {
     const price = Number(newPriceValue); // for isNaN checker
 
     if(!newItemValue && !newPriceValue) {
         setFormSubError("Fill at least one field");
     } else {
+      // if item value is falsy
       if(!newItemValue) {
         if(isNaN(price) || price <= 0) setFormSubError("Positive numeric values only");
       }
-      
+
       setSubLoading(true);
       try {
         // hook here
