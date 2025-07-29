@@ -21,48 +21,40 @@ const editProduct = () => {
   }
 
   const submitForm = async () => {
-  const trimmedItem = newItemValue?.trim();
-  const trimmedPrice = newPriceValue?.trim();
-  const price = Number(trimmedPrice);
+    const price = Number(newPriceValue);
 
-  // If both are blank or just whitespace
-  if (!trimmedItem && !trimmedPrice) {
-    setFormSubError("Fill up at least one field");
-    return;
+    // If both are blank or just whitespace
+    if (!newItemValue && !newPriceValue) {
+      setFormSubError("Fill up at least one field");
+    } else if(newPriceValue && (isNaN(price) || price <= 0)) {
+      setFormSubError("Positive numeric values only");
+    } else {
+      setSubLoading(true);
+      
+      try {
+        const response = await fetch(`${API_URL}/products`, {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            id: productId,
+            item: newItemValue.trim(),
+            base_price: price,
+          }),
+        });
+        
+        if (!response.ok) throw new Error("Failed to update product");
+        Alert.alert("Success", "Product updated successfully");      
+      } catch (error) {
+        console.error("Error updating product: ", error);
+        Alert.alert("An error occurred", error.message);
+      } finally {
+        setSubLoading(false);
+        handleReturn();
+      }
+    }
   }
-
-  // If price is provided but invalid
-  if (trimmedPrice && (isNaN(price) || price <= 0)) {
-    setFormSubError("Positive numeric values only");
-    return;
-  }
-
-  setSubLoading(true);
-  try {
-    const response = await fetch(`${API_URL}/products`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        id: productId,
-        item: trimmedItem || undefined,
-        base_price: trimmedPrice ? price : undefined,
-      }),
-    });
-
-    if (!response.ok) throw new Error("Failed to update product");
-
-    Alert.alert("Success", "Product updated successfully");
-
-  } catch (error) {
-    console.error("Error updating product: ", error);
-    Alert.alert("An error occurred", error.message);
-  } finally {
-    setSubLoading(false);
-    handleReturn();
-  }
-};
 
 
   return (

@@ -2,7 +2,7 @@ import PageLoader from '@/components/PageLoader';
 
 import { CustomersItemRegular } from '@/components/CustomersItemRegular';
 import { FilteredSearch } from '@/components/FilteredSearch';
-import { FlatList, Text, View, RefreshControl } from 'react-native';
+import { FlatList, RefreshControl, Text, View } from 'react-native';
 import { genStyles } from '@/assets/styles/general.styles.js';
 import { handleDelete } from '@/utils/helpers';
 import { useCustomers } from "@/hooks/useCustomers.js";
@@ -25,6 +25,7 @@ export default function LogOrder() {
         setRefreshing(false);
     }
 
+    // passing the ff. data
     const createOrder = (id, name) => {
         router.push({
             pathname: "/logOrder/orderFor",
