@@ -11,6 +11,7 @@ import { useCustomers } from '@/hooks/useCustomers';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'expo-router';
 import { useUser } from '@clerk/clerk-expo';
+import editCustomer from './editCustomer';
 
 export default function customer() {
     const router = useRouter();
@@ -24,6 +25,17 @@ export default function customer() {
     const createCustomer = () => {
         // console.log("Creating customer...");
         router.push("customers/createCustomer");
+    }
+
+    const updateCustomer = (id, name, address) => {
+        router.push({
+            pathname: "/customers/editCustomer",
+            params: {
+                customerId: id,
+                customerName: name,
+                customerAddress: address,
+            }
+        })
     }
 
     const onRefresh = async() => {
@@ -57,7 +69,7 @@ export default function customer() {
                 renderItem={({item}) => (
                     // Choose customer op
                     // To do: choose products for customer purchase
-                    <CustomersItem item={item} onDelete={handleDelete} delOp={deleteCustomer} cardAct={() => {null}}
+                    <CustomersItem item={item} onDelete={handleDelete} delOp={deleteCustomer} cardAct={() => {null}} onEdit={updateCustomer}
                     />
                 )}
                 ListEmptyComponent={
