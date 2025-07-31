@@ -77,4 +77,4 @@ const editProduct = () => {
   );
 }
 
-export default editProduct
+export default editProduct;
