@@ -32,6 +32,7 @@ export const ProductForm = (
                         clearButtonMode="always"
                         style={[genStyles.searchBar, { marginBottom : 20, color: COLORS.borderDrk }, formError && genStyles.errorInput]} // edit error behavior
                         placeholder={itemHolder}
+                        placeholderTextColor={COLORS.grnShd}
                         value={itemVal}
                         onChangeText={(item) => {
                             setItemVal(item);
@@ -46,6 +47,7 @@ export const ProductForm = (
                         clearButtonMode="always"
                         style={[genStyles.searchBar, { marginBottom : 0, color: COLORS.borderDrk}, formError && genStyles.errorInput]}
                         placeholder={priceHolder}
+                        placeholderTextColor={COLORS.grnShd}
                         value={priceVal}
                         onChangeText={(price) => {
                             const isDecimal = price.replace(/[^0-9.]/g, '').replace(/(\..*?)\./g, '$1'); // allows decimal format input

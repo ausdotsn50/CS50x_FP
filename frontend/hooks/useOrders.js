@@ -1,8 +1,7 @@
 import { Alert } from "react-native";
 import { useCallback, useState } from "react"
 
-// export const API_URL = "https://cs50x-fp-api.onrender.com/api";
-export const API_URL = "http://localhost:5001/api";
+export const API_URL = "https://cs50x-fp-api.onrender.com/api";
 
 // react custom hook
 export const useOrders = (userId) => {

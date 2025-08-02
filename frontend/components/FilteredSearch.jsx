@@ -1,8 +1,9 @@
 import filter from "lodash.filter";
 
-import { useEffect, useState } from "react";
-import { TextInput } from 'react-native';
+import { COLORS } from "../constants/color";
 import { genStyles } from '@/assets/styles/general.styles.js';
+import { TextInput } from 'react-native';
+import { useEffect, useState } from "react";
 
 export const FilteredSearch = ({ dataToFilter, onFilter }) => {
     const[searchQuery, setSearchQuery] = useState(""); // by default, an empty string
@@ -35,6 +36,7 @@ export const FilteredSearch = ({ dataToFilter, onFilter }) => {
             autoComplete={false}
             autoCorrect={false}
             placeholder="Search" 
+            placeholderTextColor={COLORS.grnShd}
             clearButtonMode='always' 
             style={genStyles.searchBar}
             value={searchQuery}
