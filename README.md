@@ -26,5 +26,15 @@ Alzar includes user authentication via sign-up and sign-in systems. Upon logging
 ### Installation
   *Instructions placeholder*
 
+## Tech Stack
+- Mobile Platform: iOS (built with Expo + React Native)
+- Backend: Node.js with Express
+- Database: Neon (PostgreSQL)
+- Authentication: Clerk
+- Hosting: Render
+- API Testing: Postman
+- Rate Limiting & Caching: Redis
+- Version Control: Git & GitHub
+
 ## Acknowledgements
 * Application Inspo: [Wallet – Expense Tracker by Codesistency](https://www.youtube.com/watch?v=vk13GJi4Vd0&list=LL&index=4&t=125s)
