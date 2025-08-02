@@ -19,7 +19,7 @@ export const OrdersItem = ({ item, onDelete, delOp }) => {
             id={item.id}
             rightContent={
                 <>
-                    <Text style={genStyles.itemAmount}>Php {((parseFloat(item.base_price) + costAdd) * item.quantity).toFixed(2)}</Text>
+                    <Text style={genStyles.itemAmount}>Php {(parseFloat(item.total_price)).toFixed(2)}</Text>
                     <Text style={genStyles.itemDate}>{formattedDate}</Text>
                 </>
             }
